@@ -21,9 +21,12 @@ The command-line tool for doing the same thing is faust2esp32. The tutorials say
 
 ### step 1: compile faust master-dev 
 instructions taken from https://github.com/grame-cncm/faust/wiki/BuildingSimple
-```git clone https://github.com/grame-cncm/faust.git
+
+```
+git clone https://github.com/grame-cncm/faust.git
 cd faust
-git submodule update --init```
+git submodule update --init
+```
 
 (commit I used: 56072051920bb4ec482661670bbc8037af12dbe3)
 
