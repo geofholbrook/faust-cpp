@@ -37,6 +37,10 @@ make
 sudo make install
 ```
 
+NOTE: if you get this error:
+`Could NOT find PkgConfig (missing: PKG_CONFIG_EXECUTABLE)`
+then you have to run `brew install pkg-config` first! (or sudo apt-get install pkg-config on Linux, i guess. On the Mac just get homebrew.)
+
 the goal here is to have `faust2esp32` available as an executable in the terminal. I think that `sudo make install` puts the faust executables in someplace like /usr/local/bin
 
 ### step 2: install the "software development environment" for the ESP32
