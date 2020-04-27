@@ -47,7 +47,17 @@ the goal here is to have `faust2esp32` available as an executable in the termina
 
 follow the steps here, up to and including step 4: https://docs.espressif.com/projects/esp-idf/en/latest/esp32/get-started/index.html (as it says in the esp32 instructions in the Faust tutorial)
 
+side note: if you have any problems running `install.sh`, you might want to make sure you have an up-to-date version of esp-idf. With `git describe --tags` we get: 
+
+```
+v4.2-dev-1206-g741960d5c
+```
+
+If it's less than that you should update it. Maybe by erasing the local repo and installing from scratch? 
+
 That last step (running the `export.sh` script) makes the "ESP-IDF tools available" in your terminal. It says you can automate it and have it always available in every terminal but it sure is a lot of crap in your $PATH variable, as you can see if you run `echo $PATH`. So Step 4 probably needs to be done each time you sit down to do this.
+
+
 
 ### step 3: create a template
 
