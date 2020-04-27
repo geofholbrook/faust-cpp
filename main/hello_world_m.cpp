@@ -15,8 +15,8 @@
 
 #include "WM8978.h"
 #include "WM8978.cpp"
-#include "PWMSiren.h"
-#include "PWMSiren.cpp"
+#include "DjembeGroove.h"
+#include "DjembeGroove.cpp"
 
 extern "C" void app_main();
 
@@ -40,7 +40,7 @@ void app_main(void)
     wm8978.i2sCfg(2,0);
     
     // Allocate and start Faust DSP
-    PWMSiren* DSP = new PWMSiren(44100, 32);
+    DjembeGroove* DSP = new DjembeGroove(44100, 32);
     DSP->start();
     
     // Waiting forever
