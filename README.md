@@ -61,7 +61,13 @@ That last step (running the `export.sh` script) makes the "ESP-IDF tools availab
 
 ### step 3: create a template
 
-so I'm going to do a better job of this, so you don't have to struggle with the ESP32 hello_world example. We should be able to make a script that uses faust2esp32 and just puts everything in the right place. (note for myself: see faust-cpp folder)    
+so I'm going to do a better job of this, so you don't have to struggle with the ESP32 hello_world example. We should be able to make a script that uses faust2esp32 and just puts everything in the right place. (note for myself: see faust-cpp folder)
+
+for now, clone my faust-cpp repo: 
+```
+git clone https://github.com/geofholbrook/faust-cpp.git
+(to get the commit as of this writing: git checkout 77ebff2d16b9964d84cb294c049480fbfba8ad82)
+```
 
 ### step 4: create esp32 version of a faust program
 create and test the .Dsp program in the online faust editor. Download the file. Go to the location (~/Downloads?) in the terminal and run faust2esp32 <name-of-file> ... or a script that I'll make to insert this into a template that's going to just work. 
