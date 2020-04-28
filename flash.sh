@@ -23,12 +23,16 @@ unzip "${MODULENAME}.zip"
 # copy and rename generated .h file
 cp ./${MODULENAME}/FaustDSP/include/${MODULENAME}.h ./main/FaustProgram.h
 
-# copy and rename generated .cpp file but replace include statement with correct .h file
+# copy and rename generated .cpp file but replace include statement with correct .h file, 
 sed "s/${MODULENAME}.h/FaustProgram.h/g" ./${MODULENAME}/FaustDSP/${MODULENAME}.cpp > ./main/FaustProgram.cpp
+
+# add with the EXT_RAM_ATTR attribute where necessary
+sed -i "" "s/ftbl0mydspSIG0\[65536\]/ftbl0mydspSIG0\[65536\] EXT_RAM_ATTR/g" ./main/FaustProgram.cpp
 
 # remove zip and unzipped directory
 rm "${MODULENAME}.zip"
 rm -rf ./${MODULENAME}
+
 
 # replace reference to faust instrument in template and create main.cpp
 sed "s/%ModuleName%/${MODULENAME}/g" ./main/main-template.txt > ./main/main.cpp

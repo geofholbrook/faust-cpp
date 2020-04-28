@@ -8200,7 +8200,7 @@ class mydspSIG0 {
 static mydspSIG0* newmydspSIG0() { return (mydspSIG0*)new mydspSIG0(); }
 static void deletemydspSIG0(mydspSIG0* dsp) { delete dsp; }
 
-static float ftbl0mydspSIG0[65536];
+static float ftbl0mydspSIG0[65536] EXT_RAM_ATTR;
 
 #ifndef FAUSTCLASS 
 #define FAUSTCLASS mydsp
