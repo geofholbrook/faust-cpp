@@ -1,26 +1,41 @@
 # Flash a Faust DSP program to ESP32
-... in our case, TTGO TAudio board
+... in our case, on the TTGO TAudio board
 
-this roughly follows the isntructions here:
+Based on [these instructions](
+https://faust.grame.fr/doc/tutorials/#using-the-esp32-c-development-environment).
 
-https://faust.grame.fr/doc/tutorials/#using-the-esp32-c-development-environment
+This repo consists of a script, `flash.sh`, and a template, rendering most of those steps unnecessary. 
 
-but there are a few things missing, trying to cover them here.
+# usage
 
+You can develop, test and download your .dsp file using the [online Faust editor](https://faust.grame.fr/editor/).
 
-from original README.md from the hello_world example of the esp-idf repo:
-    `See the README.md file in the upper level 'examples' directory for more information about examples.`
+in the terminal, make sure you are navigated to the root of this repo.
+make sure the board is connected for flashing.
+run 
+```
+sh ./flash.sh <path-to-DSP-file>
+```
 
-that refers to this: https://github.com/espressif/esp-idf/blob/138c941fad431d3ef2ccbe3eaabf08b96cdc4d0b/examples/get-started/README.md
+(It probably makes sense to put your .dsp files in)
 
+this will leave a working main.cpp file and updated dependencies in the /main directory. to flash again without building, run 
+```
+sh ./reflash.sh
+```
 
-## process
+# requirements
 
-You can export a faust DSP document in "ESP32 format" using the online Faust editor. I'm not sure this works though.
-The command-line tool for doing the same thing is faust2esp32. The tutorials say that it is included in the distribution, but as of today (april 25 2020) it seems to only be included in the master-dev branch. So
+There are two requirements for the `flash.sh` script to work.
+1. you have to have faust2esp32 compiled executable from the terminal
+2. you have to have ESP32 development environment installed
 
-### step 1: compile faust master-dev 
-instructions taken from https://github.com/grame-cncm/faust/wiki/BuildingSimple
+## requirement 1: faust2esp32
+
+**You have to compile the master-dev branch of Faust.**
+
+The tutorials say that it is included in the distribution, but as of today (april 25 2020) it seems to only be included in the master-dev branch. So
+using instructions taken from [here](https://github.com/grame-cncm/faust/wiki/BuildingSimple) :
 
 ```
 git clone https://github.com/grame-cncm/faust.git
@@ -30,8 +45,9 @@ git submodule update --init
 
 (commit I used: 56072051920bb4ec482661670bbc8037af12dbe3)
 
-you have to have cmake installed. I have Homebrew (https://brew.sh/), so I used `brew install cmake`.
-then:
+NB: you have to have cmake installed. I have Homebrew (https://brew.sh/), so I used `brew install cmake`.
+
+Then:
 ```
 make
 sudo make install
@@ -43,53 +59,8 @@ then you have to run `brew install pkg-config` first! (or sudo apt-get install p
 
 the goal here is to have `faust2esp32` available as an executable in the terminal. I think that `sudo make install` puts the faust executables in someplace like /usr/local/bin
 
-### step 2: install the "software development environment" for the ESP32
+## requirement 2: install ESP-IDF
 
-follow the steps here, up to and including step 4: https://docs.espressif.com/projects/esp-idf/en/latest/esp32/get-started/index.html (as it says in the esp32 instructions in the Faust tutorial)
+follow the steps [here](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/get-started/index.html), up to and including step 3:  (as it says in the esp32 instructions in the Faust tutorial)
 
-side note: if you have any problems running `install.sh`, you might want to make sure you have an up-to-date version of esp-idf. With `git describe --tags` we get: 
-
-```
-v4.2-dev-1206-g741960d5c
-```
-
-If it's less than that you should update it. Maybe by erasing the local repo and installing from scratch? 
-
-That last step (running the `export.sh` script) makes the "ESP-IDF tools available" in your terminal. It says you can automate it and have it always available in every terminal but it sure is a lot of crap in your $PATH variable, as you can see if you run `echo $PATH`. So Step 4 probably needs to be done each time you sit down to do this.
-
-
-
-### step 3: create a template
-
-so I'm going to do a better job of this, so you don't have to struggle with the ESP32 hello_world example. We should be able to make a script that uses faust2esp32 and just puts everything in the right place. (note for myself: see faust-cpp folder)
-
-for now, clone my faust-cpp repo: 
-```
-git clone https://github.com/geofholbrook/faust-cpp.git
-(to get the commit as of this writing: git checkout 77ebff2d16b9964d84cb294c049480fbfba8ad82)
-```
-
-### step 4: create esp32 version of a faust program
-create and test the .Dsp program in the online faust editor. Download the file. Go to the location (~/Downloads?) in the terminal and run faust2esp32 <name-of-file> ... or a script that I'll make to insert this into a template that's going to just work. 
-
-### step 5: build and flash 
-now you can run `idf.py build`. It will work as long as the faust program doesn't use too much RAM. If it doesn't then you have to run `idf.py menuconfig`, and change a bunch of settings: follow the steps from the tutorial, which I'll copy here:
-
-...navigate to Component Config/ESP32-specific. Then activate Support for external RAM, SPI-Connected RAM by highlighting this zone and pressing the y key. Enter the SPI RAM config/SPI RAM access method menu and choose Integrate RAM into ESP32 memory map. Then select Allow .bss segment placed in external memory and press the y key to activate this function. Finally, open FaustSawtooth.cpp (even though we’re trying to synthesize a sine wave now, i.e., the name of this file might differ in your case) and search for static float ftbl0mydspSIG0 which is the static table that will be filled with the sine wave table. This section of the C++ code generated by the Faust compiler will always contain large tables requiring lots of memory. You now want to add the EXT_RAM_ATTR attribute next to the table definition:
-
-static float ftbl0mydspSIG0[65536] EXT_RAM_ATTR;
-
-the menu settings seems to change files in the workspace ... so maybe this can be part of the template. Anyway once that's done you run `idf.py build` again. NOW you can run `idf.py -p /dev/tty.SLAB_USBtoUART flash [monitor]` (monitor lets you see the output of printf calls)  (SLAB-whatever, that's the port on my setup) .... this should upload to the board.
-
-
-
-
-
-
-
-
-
-
-
-
-
+side note: if you have any problems running `install.sh` (for example, we ran into something like [this issue](https://github.com/espressif/esp-idf/issues/4744)), you will want to make sure you have an up-to-date version of esp-idf. With `git describe --tags` we get `4.2-dev-1206-g741960d5c`. If it appears to be older than that you should update it. Maybe by erasing the local repo and installing from scratch?

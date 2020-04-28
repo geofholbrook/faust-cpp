@@ -41,7 +41,7 @@ void app_main(void)
     
     
     // Allocate and start Faust DSP
-    DjembeGroove* DSP = new DjembeGroove(44100, 32);
+    PWMSiren* DSP = new PWMSiren(44100, 32);
     DSP->start();
     
     // Waiting forever
