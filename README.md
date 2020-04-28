@@ -17,7 +17,7 @@ run
 sh ./flash.sh <path-to-DSP-file>
 ```
 
-(It probably makes sense to put your .dsp files in)
+(It probably makes sense to put your .dsp files in the faust-code folder, then it becomes sh ./flash.sh ./faust-code/CoolFaustDoohickey.dsp, for instance)
 
 this will leave a working main.cpp file and updated dependencies in the /main directory. to flash again without building, run 
 ```
