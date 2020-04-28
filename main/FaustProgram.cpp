@@ -1,6 +1,6 @@
 // Options :
 /* ------------------------------------------------------------
-name: "PWMSiren"
+name: "djembeRev"
 Code generated with Faust 2.23.6 (https://faust.grame.fr)
 Compilation options: -lang cpp -scal -ftz 0
 ------------------------------------------------------------ */
@@ -1114,7 +1114,7 @@ typedef struct {
 }
 ringbuffer_t;
 
-static ringbuffer_t *ringbuffer_create(size_t sz);
+static ringbuffer_t *ringbuffer_create(size_t sz) EXT_RAM_ATTR;
 static void ringbuffer_free(ringbuffer_t *rb);
 static void ringbuffer_get_read_vector(const ringbuffer_t *rb,
                                          ringbuffer_data_t *vec);
@@ -8142,65 +8142,9 @@ struct dsp_poly_factory : public dsp_factory {
 #include <cmath>
 #include <math.h>
 
-class mydspSIG0 {
-	
-  public:
-	
-	int iRec3[2];
-	
-  public:
-	
-	int getNumInputsmydspSIG0() {
-		return 0;
-	}
-	int getNumOutputsmydspSIG0() {
-		return 1;
-	}
-	int getInputRatemydspSIG0(int channel) {
-		int rate;
-		switch ((channel)) {
-			default: {
-				rate = -1;
-				break;
-			}
-		}
-		return rate;
-	}
-	int getOutputRatemydspSIG0(int channel) {
-		int rate;
-		switch ((channel)) {
-			case 0: {
-				rate = 0;
-				break;
-			}
-			default: {
-				rate = -1;
-				break;
-			}
-		}
-		return rate;
-	}
-	
-	void instanceInitmydspSIG0(int sample_rate) {
-		for (int l4 = 0; (l4 < 2); l4 = (l4 + 1)) {
-			iRec3[l4] = 0;
-		}
-	}
-	
-	void fillmydspSIG0(int count, float* table) {
-		for (int i = 0; (i < count); i = (i + 1)) {
-			iRec3[0] = (iRec3[1] + 1);
-			table[i] = std::sin((9.58738019e-05f * float((iRec3[0] + -1))));
-			iRec3[1] = iRec3[0];
-		}
-	}
-
-};
-
-static mydspSIG0* newmydspSIG0() { return (mydspSIG0*)new mydspSIG0(); }
-static void deletemydspSIG0(mydspSIG0* dsp) { delete dsp; }
-
-static float ftbl0mydspSIG0[65536] EXT_RAM_ATTR;
+static float mydsp_faustpower2_f(float value) {
+	return (value * value);
+}
 
 #ifndef FAUSTCLASS 
 #define FAUSTCLASS mydsp
@@ -8215,42 +8159,205 @@ class mydsp : public dsp {
 	
  public:
 	
-	int iVec0[2];
-	int iRec1[2];
-	int iRec2[2];
 	int fSampleRate;
 	float fConst0;
-	int iConst1;
+	float fConst1;
 	float fConst2;
-	float fRec0[2];
-	float fRec5[2];
-	float fRec4[2];
 	float fConst3;
-	float fRec6[2];
+	float fConst4;
+	float fConst5;
+	float fConst6;
+	float fConst7;
+	float fConst8;
+	int iVec0[2];
+	int iRec3[2];
+	float fConst9;
+	float fConst10;
+	float fRec2[3];
+	float fConst11;
+	float fConst12;
+	float fConst13;
+	float fRec1[3];
+	float fConst14;
+	int iRec5[2];
+	int iRec6[2];
+	int iVec1[2];
+	int iRec4[2];
+	float fConst15;
+	float fConst16;
+	float fConst17;
+	float fRec0[3];
+	float fConst18;
+	float fConst19;
+	float fConst20;
+	float fRec7[3];
+	float fConst21;
+	float fConst22;
+	float fConst23;
+	float fRec8[3];
+	float fConst24;
+	float fConst25;
+	float fConst26;
+	float fRec9[3];
+	float fConst27;
+	float fConst28;
+	float fConst29;
+	float fRec10[3];
+	float fConst30;
+	float fConst31;
+	float fConst32;
+	float fRec11[3];
+	float fConst33;
+	float fConst34;
+	float fConst35;
+	float fRec12[3];
+	float fConst36;
+	float fConst37;
+	float fConst38;
+	float fRec13[3];
+	float fConst39;
+	float fConst40;
+	float fConst41;
+	float fRec14[3];
+	float fConst42;
+	float fConst43;
+	float fConst44;
+	float fRec15[3];
+	float fConst45;
+	float fConst46;
+	float fConst47;
+	float fRec16[3];
+	float fConst48;
+	float fConst49;
+	float fConst50;
+	float fRec17[3];
+	float fConst51;
+	float fConst52;
+	float fConst53;
+	float fRec18[3];
+	float fConst54;
+	float fConst55;
+	float fConst56;
+	float fRec19[3];
+	float fConst57;
+	float fConst58;
+	float fConst59;
+	float fRec20[3];
+	float fConst60;
+	float fConst61;
+	float fConst62;
+	float fRec21[3];
+	float fConst63;
+	float fConst64;
+	float fConst65;
+	float fRec22[3];
+	float fConst66;
+	float fConst67;
+	float fConst68;
+	float fRec23[3];
+	float fConst69;
+	float fConst70;
+	float fConst71;
+	float fRec24[3];
+	float fConst72;
+	float fConst73;
+	float fConst74;
+	float fRec25[3];
+	float fRec35[2];
+	int IOTA;
+	float fVec2[8192];
+	int iConst75;
+	float fRec34[2];
+	float fRec37[2];
+	float fVec3[8192];
+	int iConst76;
+	float fRec36[2];
+	float fRec39[2];
+	float fVec4[8192];
+	int iConst77;
+	float fRec38[2];
+	float fRec41[2];
+	float fVec5[8192];
+	int iConst78;
+	float fRec40[2];
+	float fRec43[2];
+	float fVec6[8192];
+	int iConst79;
+	float fRec42[2];
+	float fRec45[2];
+	float fVec7[8192];
+	int iConst80;
+	float fRec44[2];
+	float fRec47[2];
+	float fVec8[8192];
+	int iConst81;
+	float fRec46[2];
+	float fRec49[2];
+	float fVec9[8192];
+	int iConst82;
+	float fRec48[2];
+	float fVec10[2048];
+	int iConst83;
+	float fRec32[2];
+	float fVec11[2048];
+	int iConst84;
+	float fRec30[2];
+	float fVec12[2048];
+	int iConst85;
+	float fRec28[2];
+	float fVec13[1024];
+	int iConst86;
+	float fRec26[2];
 	
  public:
 	
 	void metadata(Meta* m) { 
 		m->declare("basics.lib/name", "Faust Basic Element Library");
 		m->declare("basics.lib/version", "0.1");
+		m->declare("delays.lib/name", "Faust Delay Library");
+		m->declare("delays.lib/version", "0.1");
+		m->declare("envelopes.lib/ar:author", "Yann Orlarey, Stéphane Letz");
 		m->declare("envelopes.lib/author", "GRAME");
 		m->declare("envelopes.lib/copyright", "GRAME");
 		m->declare("envelopes.lib/license", "LGPL with exception");
 		m->declare("envelopes.lib/name", "Faust Envelope Library");
 		m->declare("envelopes.lib/version", "0.1");
-		m->declare("filename", "PWMSiren.dsp");
+		m->declare("filename", "djembeRev.dsp");
+		m->declare("filters.lib/allpass_comb:author", "Julius O. Smith III");
+		m->declare("filters.lib/allpass_comb:copyright", "Copyright (C) 2003-2019 by Julius O. Smith III <jos@ccrma.stanford.edu>");
+		m->declare("filters.lib/allpass_comb:license", "MIT-style STK-4.3 license");
+		m->declare("filters.lib/fir:author", "Julius O. Smith III");
+		m->declare("filters.lib/fir:copyright", "Copyright (C) 2003-2019 by Julius O. Smith III <jos@ccrma.stanford.edu>");
+		m->declare("filters.lib/fir:license", "MIT-style STK-4.3 license");
+		m->declare("filters.lib/highpass:author", "Julius O. Smith III");
+		m->declare("filters.lib/highpass:copyright", "Copyright (C) 2003-2019 by Julius O. Smith III <jos@ccrma.stanford.edu>");
+		m->declare("filters.lib/iir:author", "Julius O. Smith III");
+		m->declare("filters.lib/iir:copyright", "Copyright (C) 2003-2019 by Julius O. Smith III <jos@ccrma.stanford.edu>");
+		m->declare("filters.lib/iir:license", "MIT-style STK-4.3 license");
+		m->declare("filters.lib/lowpass0_highpass1", "Copyright (C) 2003-2019 by Julius O. Smith III <jos@ccrma.stanford.edu>");
+		m->declare("filters.lib/lowpass0_highpass1:author", "Julius O. Smith III");
+		m->declare("filters.lib/lowpass:author", "Julius O. Smith III");
+		m->declare("filters.lib/lowpass:copyright", "Copyright (C) 2003-2019 by Julius O. Smith III <jos@ccrma.stanford.edu>");
+		m->declare("filters.lib/lowpass:license", "MIT-style STK-4.3 license");
+		m->declare("filters.lib/name", "Faust Filters Library");
+		m->declare("filters.lib/tf2:author", "Julius O. Smith III");
+		m->declare("filters.lib/tf2:copyright", "Copyright (C) 2003-2019 by Julius O. Smith III <jos@ccrma.stanford.edu>");
+		m->declare("filters.lib/tf2:license", "MIT-style STK-4.3 license");
+		m->declare("filters.lib/tf2s:author", "Julius O. Smith III");
+		m->declare("filters.lib/tf2s:copyright", "Copyright (C) 2003-2019 by Julius O. Smith III <jos@ccrma.stanford.edu>");
+		m->declare("filters.lib/tf2s:license", "MIT-style STK-4.3 license");
 		m->declare("maths.lib/author", "GRAME");
 		m->declare("maths.lib/copyright", "GRAME");
 		m->declare("maths.lib/license", "LGPL with exception");
 		m->declare("maths.lib/name", "Faust Math Library");
 		m->declare("maths.lib/version", "2.2");
-		m->declare("name", "PWMSiren");
-		m->declare("oscillators.lib/name", "Faust Oscillator Library");
-		m->declare("oscillators.lib/version", "0.0");
+		m->declare("name", "djembeRev");
+		m->declare("noises.lib/name", "Faust Noise Generator Library");
+		m->declare("noises.lib/version", "0.0");
 		m->declare("platform.lib/name", "Generic Platform Library");
 		m->declare("platform.lib/version", "0.1");
-		m->declare("signals.lib/name", "Faust Signal Routing Library");
-		m->declare("signals.lib/version", "0.0");
+		m->declare("reverbs.lib/name", "Faust Reverb Library");
+		m->declare("reverbs.lib/version", "0.0");
 	}
 
 	virtual int getNumInputs() {
@@ -8285,18 +8392,97 @@ class mydsp : public dsp {
 	}
 	
 	static void classInit(int sample_rate) {
-		mydspSIG0* sig0 = newmydspSIG0();
-		sig0->instanceInitmydspSIG0(sample_rate);
-		sig0->fillmydspSIG0(65536, ftbl0mydspSIG0);
-		deletemydspSIG0(sig0);
 	}
 	
 	virtual void instanceConstants(int sample_rate) {
 		fSampleRate = sample_rate;
 		fConst0 = std::min<float>(192000.0f, std::max<float>(1.0f, float(fSampleRate)));
-		iConst1 = int((0.00999999978f * fConst0));
-		fConst2 = (1.0f / fConst0);
-		fConst3 = (4.0f / fConst0);
+		fConst1 = std::tan((25132.7422f / fConst0));
+		fConst2 = (1.0f / fConst1);
+		fConst3 = (1.0f / (((fConst2 + 1.41421354f) / fConst1) + 1.0f));
+		fConst4 = std::tan((911.06189f / fConst0));
+		fConst5 = (1.0f / fConst4);
+		fConst6 = (1.0f / (((fConst5 + 1.41421354f) / fConst4) + 1.0f));
+		fConst7 = mydsp_faustpower2_f(fConst4);
+		fConst8 = (1.0f / fConst7);
+		fConst9 = (((fConst5 + -1.41421354f) / fConst4) + 1.0f);
+		fConst10 = (2.0f * (1.0f - fConst8));
+		fConst11 = (0.0f - (2.0f / fConst7));
+		fConst12 = (((fConst2 + -1.41421354f) / fConst1) + 1.0f);
+		fConst13 = (2.0f * (1.0f - (1.0f / mydsp_faustpower2_f(fConst1))));
+		fConst14 = (1.0f / std::max<float>(1.0f, (0.00100000005f * fConst0)));
+		fConst15 = std::pow(0.00100000005f, (1.66666663f / fConst0));
+		fConst16 = (std::cos((376.991119f / fConst0)) * (0.0f - (2.0f * fConst15)));
+		fConst17 = mydsp_faustpower2_f(fConst15);
+		fConst18 = std::pow(0.00100000005f, (1.75438595f / fConst0));
+		fConst19 = (std::cos((1633.62817f / fConst0)) * (0.0f - (2.0f * fConst18)));
+		fConst20 = mydsp_faustpower2_f(fConst18);
+		fConst21 = std::pow(0.00100000005f, (1.85185182f / fConst0));
+		fConst22 = (std::cos((2890.26514f / fConst0)) * (0.0f - (2.0f * fConst21)));
+		fConst23 = mydsp_faustpower2_f(fConst21);
+		fConst24 = std::pow(0.00100000005f, (1.96078432f / fConst0));
+		fConst25 = (std::cos((4146.90234f / fConst0)) * (0.0f - (2.0f * fConst24)));
+		fConst26 = mydsp_faustpower2_f(fConst24);
+		fConst27 = std::pow(0.00100000005f, (2.08333325f / fConst0));
+		fConst28 = (std::cos((5403.53955f / fConst0)) * (0.0f - (2.0f * fConst27)));
+		fConst29 = mydsp_faustpower2_f(fConst27);
+		fConst30 = std::pow(0.00100000005f, (2.22222233f / fConst0));
+		fConst31 = (std::cos((6660.17627f / fConst0)) * (0.0f - (2.0f * fConst30)));
+		fConst32 = mydsp_faustpower2_f(fConst30);
+		fConst33 = std::pow(0.00100000005f, (2.38095236f / fConst0));
+		fConst34 = (std::cos((7916.81348f / fConst0)) * (0.0f - (2.0f * fConst33)));
+		fConst35 = mydsp_faustpower2_f(fConst33);
+		fConst36 = std::pow(0.00100000005f, (2.56410265f / fConst0));
+		fConst37 = (std::cos((9173.4502f / fConst0)) * (0.0f - (2.0f * fConst36)));
+		fConst38 = mydsp_faustpower2_f(fConst36);
+		fConst39 = std::pow(0.00100000005f, (2.77777767f / fConst0));
+		fConst40 = (std::cos((10430.0879f / fConst0)) * (0.0f - (2.0f * fConst39)));
+		fConst41 = mydsp_faustpower2_f(fConst39);
+		fConst42 = std::pow(0.00100000005f, (3.030303f / fConst0));
+		fConst43 = (std::cos((11686.7246f / fConst0)) * (0.0f - (2.0f * fConst42)));
+		fConst44 = mydsp_faustpower2_f(fConst42);
+		fConst45 = std::pow(0.00100000005f, (3.33333325f / fConst0));
+		fConst46 = (std::cos((12943.3613f / fConst0)) * (0.0f - (2.0f * fConst45)));
+		fConst47 = mydsp_faustpower2_f(fConst45);
+		fConst48 = std::pow(0.00100000005f, (3.70370364f / fConst0));
+		fConst49 = (std::cos((14199.999f / fConst0)) * (0.0f - (2.0f * fConst48)));
+		fConst50 = mydsp_faustpower2_f(fConst48);
+		fConst51 = std::pow(0.00100000005f, (4.16666651f / fConst0));
+		fConst52 = (std::cos((15456.6357f / fConst0)) * (0.0f - (2.0f * fConst51)));
+		fConst53 = mydsp_faustpower2_f(fConst51);
+		fConst54 = std::pow(0.00100000005f, (4.76190472f / fConst0));
+		fConst55 = (std::cos((16713.2734f / fConst0)) * (0.0f - (2.0f * fConst54)));
+		fConst56 = mydsp_faustpower2_f(fConst54);
+		fConst57 = std::pow(0.00100000005f, (5.55555534f / fConst0));
+		fConst58 = (std::cos((17969.9102f / fConst0)) * (0.0f - (2.0f * fConst57)));
+		fConst59 = mydsp_faustpower2_f(fConst57);
+		fConst60 = std::pow(0.00100000005f, (6.66666651f / fConst0));
+		fConst61 = (std::cos((19226.5469f / fConst0)) * (0.0f - (2.0f * fConst60)));
+		fConst62 = mydsp_faustpower2_f(fConst60);
+		fConst63 = std::pow(0.00100000005f, (8.33333302f / fConst0));
+		fConst64 = (std::cos((20483.1836f / fConst0)) * (0.0f - (2.0f * fConst63)));
+		fConst65 = mydsp_faustpower2_f(fConst63);
+		fConst66 = std::pow(0.00100000005f, (11.1111107f / fConst0));
+		fConst67 = (std::cos((21739.8203f / fConst0)) * (0.0f - (2.0f * fConst66)));
+		fConst68 = mydsp_faustpower2_f(fConst66);
+		fConst69 = std::pow(0.00100000005f, (16.666666f / fConst0));
+		fConst70 = (std::cos((22996.459f / fConst0)) * (0.0f - (2.0f * fConst69)));
+		fConst71 = mydsp_faustpower2_f(fConst69);
+		fConst72 = std::pow(0.00100000005f, (33.3333321f / fConst0));
+		fConst73 = (std::cos((24253.0957f / fConst0)) * (0.0f - (2.0f * fConst72)));
+		fConst74 = mydsp_faustpower2_f(fConst72);
+		iConst75 = (int((0.0253061224f * fConst0)) + 1);
+		iConst76 = (int((0.0269387756f * fConst0)) + 1);
+		iConst77 = (int((0.0289569162f * fConst0)) + 1);
+		iConst78 = (int((0.0307482984f * fConst0)) + 1);
+		iConst79 = (int((0.0322448984f * fConst0)) + 1);
+		iConst80 = (int((0.033809524f * fConst0)) + 1);
+		iConst81 = (int((0.0353061222f * fConst0)) + 1);
+		iConst82 = (int((0.0366666652f * fConst0)) + 1);
+		iConst83 = std::min<int>(1024, std::max<int>(0, int((0.0126077095f * fConst0))));
+		iConst84 = std::min<int>(1024, std::max<int>(0, int((0.00999999978f * fConst0))));
+		iConst85 = std::min<int>(1024, std::max<int>(0, int((0.00773242628f * fConst0))));
+		iConst86 = std::min<int>(1024, std::max<int>(0, int((0.00510204071f * fConst0))));
 	}
 	
 	virtual void instanceResetUserInterface() {
@@ -8307,22 +8493,182 @@ class mydsp : public dsp {
 			iVec0[l0] = 0;
 		}
 		for (int l1 = 0; (l1 < 2); l1 = (l1 + 1)) {
-			iRec1[l1] = 0;
+			iRec3[l1] = 0;
 		}
-		for (int l2 = 0; (l2 < 2); l2 = (l2 + 1)) {
-			iRec2[l2] = 0;
+		for (int l2 = 0; (l2 < 3); l2 = (l2 + 1)) {
+			fRec2[l2] = 0.0f;
 		}
-		for (int l3 = 0; (l3 < 2); l3 = (l3 + 1)) {
-			fRec0[l3] = 0.0f;
+		for (int l3 = 0; (l3 < 3); l3 = (l3 + 1)) {
+			fRec1[l3] = 0.0f;
+		}
+		for (int l4 = 0; (l4 < 2); l4 = (l4 + 1)) {
+			iRec5[l4] = 0;
 		}
 		for (int l5 = 0; (l5 < 2); l5 = (l5 + 1)) {
-			fRec5[l5] = 0.0f;
+			iRec6[l5] = 0;
 		}
 		for (int l6 = 0; (l6 < 2); l6 = (l6 + 1)) {
-			fRec4[l6] = 0.0f;
+			iVec1[l6] = 0;
 		}
 		for (int l7 = 0; (l7 < 2); l7 = (l7 + 1)) {
-			fRec6[l7] = 0.0f;
+			iRec4[l7] = 0;
+		}
+		for (int l8 = 0; (l8 < 3); l8 = (l8 + 1)) {
+			fRec0[l8] = 0.0f;
+		}
+		for (int l9 = 0; (l9 < 3); l9 = (l9 + 1)) {
+			fRec7[l9] = 0.0f;
+		}
+		for (int l10 = 0; (l10 < 3); l10 = (l10 + 1)) {
+			fRec8[l10] = 0.0f;
+		}
+		for (int l11 = 0; (l11 < 3); l11 = (l11 + 1)) {
+			fRec9[l11] = 0.0f;
+		}
+		for (int l12 = 0; (l12 < 3); l12 = (l12 + 1)) {
+			fRec10[l12] = 0.0f;
+		}
+		for (int l13 = 0; (l13 < 3); l13 = (l13 + 1)) {
+			fRec11[l13] = 0.0f;
+		}
+		for (int l14 = 0; (l14 < 3); l14 = (l14 + 1)) {
+			fRec12[l14] = 0.0f;
+		}
+		for (int l15 = 0; (l15 < 3); l15 = (l15 + 1)) {
+			fRec13[l15] = 0.0f;
+		}
+		for (int l16 = 0; (l16 < 3); l16 = (l16 + 1)) {
+			fRec14[l16] = 0.0f;
+		}
+		for (int l17 = 0; (l17 < 3); l17 = (l17 + 1)) {
+			fRec15[l17] = 0.0f;
+		}
+		for (int l18 = 0; (l18 < 3); l18 = (l18 + 1)) {
+			fRec16[l18] = 0.0f;
+		}
+		for (int l19 = 0; (l19 < 3); l19 = (l19 + 1)) {
+			fRec17[l19] = 0.0f;
+		}
+		for (int l20 = 0; (l20 < 3); l20 = (l20 + 1)) {
+			fRec18[l20] = 0.0f;
+		}
+		for (int l21 = 0; (l21 < 3); l21 = (l21 + 1)) {
+			fRec19[l21] = 0.0f;
+		}
+		for (int l22 = 0; (l22 < 3); l22 = (l22 + 1)) {
+			fRec20[l22] = 0.0f;
+		}
+		for (int l23 = 0; (l23 < 3); l23 = (l23 + 1)) {
+			fRec21[l23] = 0.0f;
+		}
+		for (int l24 = 0; (l24 < 3); l24 = (l24 + 1)) {
+			fRec22[l24] = 0.0f;
+		}
+		for (int l25 = 0; (l25 < 3); l25 = (l25 + 1)) {
+			fRec23[l25] = 0.0f;
+		}
+		for (int l26 = 0; (l26 < 3); l26 = (l26 + 1)) {
+			fRec24[l26] = 0.0f;
+		}
+		for (int l27 = 0; (l27 < 3); l27 = (l27 + 1)) {
+			fRec25[l27] = 0.0f;
+		}
+		for (int l28 = 0; (l28 < 2); l28 = (l28 + 1)) {
+			fRec35[l28] = 0.0f;
+		}
+		IOTA = 0;
+		for (int l29 = 0; (l29 < 8192); l29 = (l29 + 1)) {
+			fVec2[l29] = 0.0f;
+		}
+		for (int l30 = 0; (l30 < 2); l30 = (l30 + 1)) {
+			fRec34[l30] = 0.0f;
+		}
+		for (int l31 = 0; (l31 < 2); l31 = (l31 + 1)) {
+			fRec37[l31] = 0.0f;
+		}
+		for (int l32 = 0; (l32 < 8192); l32 = (l32 + 1)) {
+			fVec3[l32] = 0.0f;
+		}
+		for (int l33 = 0; (l33 < 2); l33 = (l33 + 1)) {
+			fRec36[l33] = 0.0f;
+		}
+		for (int l34 = 0; (l34 < 2); l34 = (l34 + 1)) {
+			fRec39[l34] = 0.0f;
+		}
+		for (int l35 = 0; (l35 < 8192); l35 = (l35 + 1)) {
+			fVec4[l35] = 0.0f;
+		}
+		for (int l36 = 0; (l36 < 2); l36 = (l36 + 1)) {
+			fRec38[l36] = 0.0f;
+		}
+		for (int l37 = 0; (l37 < 2); l37 = (l37 + 1)) {
+			fRec41[l37] = 0.0f;
+		}
+		for (int l38 = 0; (l38 < 8192); l38 = (l38 + 1)) {
+			fVec5[l38] = 0.0f;
+		}
+		for (int l39 = 0; (l39 < 2); l39 = (l39 + 1)) {
+			fRec40[l39] = 0.0f;
+		}
+		for (int l40 = 0; (l40 < 2); l40 = (l40 + 1)) {
+			fRec43[l40] = 0.0f;
+		}
+		for (int l41 = 0; (l41 < 8192); l41 = (l41 + 1)) {
+			fVec6[l41] = 0.0f;
+		}
+		for (int l42 = 0; (l42 < 2); l42 = (l42 + 1)) {
+			fRec42[l42] = 0.0f;
+		}
+		for (int l43 = 0; (l43 < 2); l43 = (l43 + 1)) {
+			fRec45[l43] = 0.0f;
+		}
+		for (int l44 = 0; (l44 < 8192); l44 = (l44 + 1)) {
+			fVec7[l44] = 0.0f;
+		}
+		for (int l45 = 0; (l45 < 2); l45 = (l45 + 1)) {
+			fRec44[l45] = 0.0f;
+		}
+		for (int l46 = 0; (l46 < 2); l46 = (l46 + 1)) {
+			fRec47[l46] = 0.0f;
+		}
+		for (int l47 = 0; (l47 < 8192); l47 = (l47 + 1)) {
+			fVec8[l47] = 0.0f;
+		}
+		for (int l48 = 0; (l48 < 2); l48 = (l48 + 1)) {
+			fRec46[l48] = 0.0f;
+		}
+		for (int l49 = 0; (l49 < 2); l49 = (l49 + 1)) {
+			fRec49[l49] = 0.0f;
+		}
+		for (int l50 = 0; (l50 < 8192); l50 = (l50 + 1)) {
+			fVec9[l50] = 0.0f;
+		}
+		for (int l51 = 0; (l51 < 2); l51 = (l51 + 1)) {
+			fRec48[l51] = 0.0f;
+		}
+		for (int l52 = 0; (l52 < 2048); l52 = (l52 + 1)) {
+			fVec10[l52] = 0.0f;
+		}
+		for (int l53 = 0; (l53 < 2); l53 = (l53 + 1)) {
+			fRec32[l53] = 0.0f;
+		}
+		for (int l54 = 0; (l54 < 2048); l54 = (l54 + 1)) {
+			fVec11[l54] = 0.0f;
+		}
+		for (int l55 = 0; (l55 < 2); l55 = (l55 + 1)) {
+			fRec30[l55] = 0.0f;
+		}
+		for (int l56 = 0; (l56 < 2048); l56 = (l56 + 1)) {
+			fVec12[l56] = 0.0f;
+		}
+		for (int l57 = 0; (l57 < 2); l57 = (l57 + 1)) {
+			fRec28[l57] = 0.0f;
+		}
+		for (int l58 = 0; (l58 < 1024); l58 = (l58 + 1)) {
+			fVec13[l58] = 0.0f;
+		}
+		for (int l59 = 0; (l59 < 2); l59 = (l59 + 1)) {
+			fRec26[l59] = 0.0f;
 		}
 	}
 	
@@ -8345,7 +8691,7 @@ class mydsp : public dsp {
 	}
 	
 	virtual void buildUserInterface(UI* ui_interface) {
-		ui_interface->openVerticalBox("PWMSiren");
+		ui_interface->openVerticalBox("djembeRev");
 		ui_interface->closeBox();
 	}
 	
@@ -8353,27 +8699,150 @@ class mydsp : public dsp {
 		FAUSTFLOAT* output0 = outputs[0];
 		for (int i = 0; (i < count); i = (i + 1)) {
 			iVec0[0] = 1;
-			iRec1[0] = ((iVec0[1] + iRec1[1]) % 11025);
-			int iTemp0 = ((iRec1[0] < 10) > 0);
-			iRec2[0] = (iTemp0 * (iRec2[1] + 1));
-			int iTemp1 = (iRec2[0] < iConst1);
-			float fTemp2 = (0.144717798f * (iTemp0 ? (iTemp1 ? 0.00999999978f : 0.100000001f) : 1.0f));
-			int iTemp3 = (std::fabs(fTemp2) < 1.1920929e-07f);
-			float fTemp4 = (iTemp3 ? 0.0f : std::exp((0.0f - (fConst2 / (iTemp3 ? 1.0f : fTemp2)))));
-			float fTemp5 = float(iTemp0);
-			fRec0[0] = ((fRec0[1] * fTemp4) + ((iTemp0 ? (iTemp1 ? fTemp5 : (0.5f * fTemp5)) : 0.0f) * (1.0f - fTemp4)));
-			fRec5[0] = (fConst2 + (fRec5[1] - std::floor((fConst2 + fRec5[1]))));
-			float fTemp6 = (fRec4[1] + (fConst2 * ((100.0f * ftbl0mydspSIG0[int((65536.0f * fRec5[0]))]) + 200.0f)));
-			fRec4[0] = (fTemp6 - std::floor(fTemp6));
-			fRec6[0] = (fConst3 + (fRec6[1] - std::floor((fConst3 + fRec6[1]))));
-			output0[i] = FAUSTFLOAT((fRec0[0] * float((ftbl0mydspSIG0[int((65536.0f * fRec4[0]))] > ftbl0mydspSIG0[int((65536.0f * fRec6[0]))]))));
+			iRec3[0] = ((1103515245 * iRec3[1]) + 12345);
+			fRec2[0] = ((4.65661287e-10f * float(iRec3[0])) - (fConst6 * ((fConst9 * fRec2[2]) + (fConst10 * fRec2[1]))));
+			fRec1[0] = ((fConst6 * (((fConst8 * fRec2[0]) + (fConst11 * fRec2[1])) + (fConst8 * fRec2[2]))) - (fConst3 * ((fConst12 * fRec1[2]) + (fConst13 * fRec1[1]))));
+			iRec5[0] = ((iVec0[1] + iRec5[1]) % 35280);
+			iRec6[0] = ((iVec0[1] + iRec6[1]) % 5733);
+			int iTemp0 = ((iRec5[0] < 1) + (iRec6[0] < 1));
+			iVec1[0] = iTemp0;
+			iRec4[0] = (((iRec4[1] + (iRec4[1] > 0)) * (iTemp0 <= iVec1[1])) + (iTemp0 > iVec1[1]));
+			float fTemp1 = (fConst14 * float(iRec4[0]));
+			float fTemp2 = (fConst3 * ((fRec1[2] + (fRec1[0] + (2.0f * fRec1[1]))) * std::max<float>(0.0f, std::min<float>(fTemp1, (2.0f - fTemp1)))));
+			fRec0[0] = (fTemp2 - ((fConst16 * fRec0[1]) + (fConst17 * fRec0[2])));
+			fRec7[0] = (fTemp2 - ((fConst19 * fRec7[1]) + (fConst20 * fRec7[2])));
+			fRec8[0] = (fTemp2 - ((fConst22 * fRec8[1]) + (fConst23 * fRec8[2])));
+			fRec9[0] = (fTemp2 - ((fConst25 * fRec9[1]) + (fConst26 * fRec9[2])));
+			fRec10[0] = (fTemp2 - ((fConst28 * fRec10[1]) + (fConst29 * fRec10[2])));
+			fRec11[0] = (fTemp2 - ((fConst31 * fRec11[1]) + (fConst32 * fRec11[2])));
+			fRec12[0] = (fTemp2 - ((fConst34 * fRec12[1]) + (fConst35 * fRec12[2])));
+			fRec13[0] = (fTemp2 - ((fConst37 * fRec13[1]) + (fConst38 * fRec13[2])));
+			fRec14[0] = (fTemp2 - ((fConst40 * fRec14[1]) + (fConst41 * fRec14[2])));
+			fRec15[0] = (fTemp2 - ((fConst43 * fRec15[1]) + (fConst44 * fRec15[2])));
+			fRec16[0] = (fTemp2 - ((fConst46 * fRec16[1]) + (fConst47 * fRec16[2])));
+			fRec17[0] = (fTemp2 - ((fConst49 * fRec17[1]) + (fConst50 * fRec17[2])));
+			fRec18[0] = (fTemp2 - ((fConst52 * fRec18[1]) + (fConst53 * fRec18[2])));
+			fRec19[0] = (fTemp2 - ((fConst55 * fRec19[1]) + (fConst56 * fRec19[2])));
+			fRec20[0] = (fTemp2 - ((fConst58 * fRec20[1]) + (fConst59 * fRec20[2])));
+			fRec21[0] = (fTemp2 - ((fConst61 * fRec21[1]) + (fConst62 * fRec21[2])));
+			fRec22[0] = (fTemp2 - ((fConst64 * fRec22[1]) + (fConst65 * fRec22[2])));
+			fRec23[0] = (fTemp2 - ((fConst67 * fRec23[1]) + (fConst68 * fRec23[2])));
+			fRec24[0] = (fTemp2 - ((fConst70 * fRec24[1]) + (fConst71 * fRec24[2])));
+			fRec25[0] = (fTemp2 - ((fConst73 * fRec25[1]) + (fConst74 * fRec25[2])));
+			float fTemp3 = ((((((((((((((((((((fRec0[0] + (0.25f * (fRec7[0] - fRec7[2]))) + (0.111111112f * (fRec8[0] - fRec8[2]))) + (0.0625f * (fRec9[0] - fRec9[2]))) + (0.0399999991f * (fRec10[0] - fRec10[2]))) + (0.027777778f * (fRec11[0] - fRec11[2]))) + (0.0204081628f * (fRec12[0] - fRec12[2]))) + (0.015625f * (fRec13[0] - fRec13[2]))) + (0.0123456791f * (fRec14[0] - fRec14[2]))) + (0.00999999978f * (fRec15[0] - fRec15[2]))) + (0.00826446246f * (fRec16[0] - fRec16[2]))) + (0.0069444445f * (fRec17[0] - fRec17[2]))) + (0.00591715984f * (fRec18[0] - fRec18[2]))) + (0.00510204071f * (fRec19[0] - fRec19[2]))) + (0.00444444455f * (fRec20[0] - fRec20[2]))) + (0.00390625f * (fRec21[0] - fRec21[2]))) + (0.00346020772f * (fRec22[0] - fRec22[2]))) + (0.00308641978f * (fRec23[0] - fRec23[2]))) + (0.00277008303f * (fRec24[0] - fRec24[2]))) + (0.00249999994f * (fRec25[0] - fRec25[2]))) - fRec0[2]);
+			float fTemp4 = (0.0500000007f * fTemp3);
+			fRec35[0] = ((0.300000012f * fRec35[1]) + (0.699999988f * fRec34[1]));
+			fVec2[(IOTA & 8191)] = (fTemp4 + (0.899999976f * fRec35[0]));
+			fRec34[0] = fVec2[((IOTA - iConst75) & 8191)];
+			fRec37[0] = ((0.300000012f * fRec37[1]) + (0.699999988f * fRec36[1]));
+			fVec3[(IOTA & 8191)] = (fTemp4 + (0.899999976f * fRec37[0]));
+			fRec36[0] = fVec3[((IOTA - iConst76) & 8191)];
+			fRec39[0] = ((0.300000012f * fRec39[1]) + (0.699999988f * fRec38[1]));
+			fVec4[(IOTA & 8191)] = (fTemp4 + (0.899999976f * fRec39[0]));
+			fRec38[0] = fVec4[((IOTA - iConst77) & 8191)];
+			fRec41[0] = ((0.300000012f * fRec41[1]) + (0.699999988f * fRec40[1]));
+			fVec5[(IOTA & 8191)] = (fTemp4 + (0.899999976f * fRec41[0]));
+			fRec40[0] = fVec5[((IOTA - iConst78) & 8191)];
+			fRec43[0] = ((0.300000012f * fRec43[1]) + (0.699999988f * fRec42[1]));
+			fVec6[(IOTA & 8191)] = (fTemp4 + (0.899999976f * fRec43[0]));
+			fRec42[0] = fVec6[((IOTA - iConst79) & 8191)];
+			fRec45[0] = ((0.300000012f * fRec45[1]) + (0.699999988f * fRec44[1]));
+			fVec7[(IOTA & 8191)] = (fTemp4 + (0.899999976f * fRec45[0]));
+			fRec44[0] = fVec7[((IOTA - iConst80) & 8191)];
+			fRec47[0] = ((0.300000012f * fRec47[1]) + (0.699999988f * fRec46[1]));
+			fVec8[(IOTA & 8191)] = (fTemp4 + (0.899999976f * fRec47[0]));
+			fRec46[0] = fVec8[((IOTA - iConst81) & 8191)];
+			fRec49[0] = ((0.300000012f * fRec49[1]) + (0.699999988f * fRec48[1]));
+			fVec9[(IOTA & 8191)] = (fTemp4 + (0.899999976f * fRec49[0]));
+			fRec48[0] = fVec9[((IOTA - iConst82) & 8191)];
+			float fTemp5 = ((((((((fRec34[0] + fRec36[0]) + fRec38[0]) + fRec40[0]) + fRec42[0]) + fRec44[0]) + fRec46[0]) + fRec48[0]) + (0.5f * fRec32[1]));
+			fVec10[(IOTA & 2047)] = fTemp5;
+			fRec32[0] = fVec10[((IOTA - iConst83) & 2047)];
+			float fRec33 = (0.0f - (0.5f * fTemp5));
+			float fTemp6 = (fRec32[1] + (fRec33 + (0.5f * fRec30[1])));
+			fVec11[(IOTA & 2047)] = fTemp6;
+			fRec30[0] = fVec11[((IOTA - iConst84) & 2047)];
+			float fRec31 = (0.0f - (0.5f * fTemp6));
+			float fTemp7 = (fRec30[1] + (fRec31 + (0.5f * fRec28[1])));
+			fVec12[(IOTA & 2047)] = fTemp7;
+			fRec28[0] = fVec12[((IOTA - iConst85) & 2047)];
+			float fRec29 = (0.0f - (0.5f * fTemp7));
+			float fTemp8 = (fRec28[1] + (fRec29 + (0.5f * fRec26[1])));
+			fVec13[(IOTA & 1023)] = fTemp8;
+			fRec26[0] = fVec13[((IOTA - iConst86) & 1023)];
+			float fRec27 = (0.0f - (0.5f * fTemp8));
+			output0[i] = FAUSTFLOAT(((0.0450000018f * fTemp3) + (0.100000001f * (fRec27 + fRec26[1]))));
 			iVec0[1] = iVec0[0];
-			iRec1[1] = iRec1[0];
-			iRec2[1] = iRec2[0];
+			iRec3[1] = iRec3[0];
+			fRec2[2] = fRec2[1];
+			fRec2[1] = fRec2[0];
+			fRec1[2] = fRec1[1];
+			fRec1[1] = fRec1[0];
+			iRec5[1] = iRec5[0];
+			iRec6[1] = iRec6[0];
+			iVec1[1] = iVec1[0];
+			iRec4[1] = iRec4[0];
+			fRec0[2] = fRec0[1];
 			fRec0[1] = fRec0[0];
-			fRec5[1] = fRec5[0];
-			fRec4[1] = fRec4[0];
-			fRec6[1] = fRec6[0];
+			fRec7[2] = fRec7[1];
+			fRec7[1] = fRec7[0];
+			fRec8[2] = fRec8[1];
+			fRec8[1] = fRec8[0];
+			fRec9[2] = fRec9[1];
+			fRec9[1] = fRec9[0];
+			fRec10[2] = fRec10[1];
+			fRec10[1] = fRec10[0];
+			fRec11[2] = fRec11[1];
+			fRec11[1] = fRec11[0];
+			fRec12[2] = fRec12[1];
+			fRec12[1] = fRec12[0];
+			fRec13[2] = fRec13[1];
+			fRec13[1] = fRec13[0];
+			fRec14[2] = fRec14[1];
+			fRec14[1] = fRec14[0];
+			fRec15[2] = fRec15[1];
+			fRec15[1] = fRec15[0];
+			fRec16[2] = fRec16[1];
+			fRec16[1] = fRec16[0];
+			fRec17[2] = fRec17[1];
+			fRec17[1] = fRec17[0];
+			fRec18[2] = fRec18[1];
+			fRec18[1] = fRec18[0];
+			fRec19[2] = fRec19[1];
+			fRec19[1] = fRec19[0];
+			fRec20[2] = fRec20[1];
+			fRec20[1] = fRec20[0];
+			fRec21[2] = fRec21[1];
+			fRec21[1] = fRec21[0];
+			fRec22[2] = fRec22[1];
+			fRec22[1] = fRec22[0];
+			fRec23[2] = fRec23[1];
+			fRec23[1] = fRec23[0];
+			fRec24[2] = fRec24[1];
+			fRec24[1] = fRec24[0];
+			fRec25[2] = fRec25[1];
+			fRec25[1] = fRec25[0];
+			fRec35[1] = fRec35[0];
+			IOTA = (IOTA + 1);
+			fRec34[1] = fRec34[0];
+			fRec37[1] = fRec37[0];
+			fRec36[1] = fRec36[0];
+			fRec39[1] = fRec39[0];
+			fRec38[1] = fRec38[0];
+			fRec41[1] = fRec41[0];
+			fRec40[1] = fRec40[0];
+			fRec43[1] = fRec43[0];
+			fRec42[1] = fRec42[0];
+			fRec45[1] = fRec45[0];
+			fRec44[1] = fRec44[0];
+			fRec47[1] = fRec47[0];
+			fRec46[1] = fRec46[0];
+			fRec49[1] = fRec49[0];
+			fRec48[1] = fRec48[0];
+			fRec32[1] = fRec32[0];
+			fRec30[1] = fRec30[0];
+			fRec28[1] = fRec28[0];
+			fRec26[1] = fRec26[0];
 		}
 	}
 
@@ -8396,7 +8865,7 @@ std::list<GUI*> GUI::fGuiList;
 ztimedmap GUI::gTimedZoneMap;
 #endif
 
-PWMSiren::PWMSiren(int sample_rate, int buffer_size)
+djembeRev::djembeRev(int sample_rate, int buffer_size)
 {
     fUI = new MapUI();
     fAudio = new esp32audio(sample_rate, buffer_size);
@@ -8422,7 +8891,7 @@ PWMSiren::PWMSiren(int sample_rate, int buffer_size)
 #endif
 }
 
-PWMSiren::~PWMSiren()
+djembeRev::~djembeRev()
 {
     delete fDSP;
     delete fUI;
@@ -8433,7 +8902,7 @@ PWMSiren::~PWMSiren()
 #endif
 }
 
-bool PWMSiren::start()
+bool djembeRev::start()
 {
 #ifdef MIDICTRL
     if (!fMIDIInterface->run()) return false;
@@ -8441,7 +8910,7 @@ bool PWMSiren::start()
     return fAudio->start();
 }
 
-void PWMSiren::stop()
+void djembeRev::stop()
 {
 #ifdef MIDICTRL
     fMIDIInterface->stop();
@@ -8449,12 +8918,12 @@ void PWMSiren::stop()
     fAudio->stop();
 }
 
-void PWMSiren::setParamValue(const std::string& path, float value)
+void djembeRev::setParamValue(const std::string& path, float value)
 {
     fUI->setParamValue(path, value);
 }
 
-float PWMSiren::getParamValue(const std::string& path)
+float djembeRev::getParamValue(const std::string& path)
 {
     return fUI->getParamValue(path);
 }
@@ -8480,7 +8949,7 @@ extern "C" void app_main()
     wm8978.i2sCfg(2,0);
     
     // Allocate and start Faust DSP
-    PWMSiren* DSP = new PWMSiren(48000, 32);
+    djembeRev* DSP = new djembeRev(48000, 32);
     DSP->start();
     
     // Waiting forever
