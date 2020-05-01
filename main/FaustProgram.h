@@ -23,8 +23,8 @@
  
  ************************************************************************/
 
-#ifndef faust_PWMSiren_h_
-#define faust_PWMSiren_h_
+#ifndef faust_DjembeGroove_h_
+#define faust_DjembeGroove_h_
 
 #include <string>
 #include "freertos/FreeRTOS.h"
@@ -39,7 +39,7 @@ class MidiUI;
 class esp32_midi;
 #endif
 
-class PWMSiren
+class DjembeGroove
 {
     private:
     
@@ -53,8 +53,8 @@ class PWMSiren
 
     public:
     
-        PWMSiren(int sample_rate, int buffer_size);
-        ~PWMSiren();
+        DjembeGroove(int sample_rate, int buffer_size);
+        ~DjembeGroove();
     
         bool start();
         void stop();
