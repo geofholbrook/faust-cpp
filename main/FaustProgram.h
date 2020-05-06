@@ -23,8 +23,8 @@
  
  ************************************************************************/
 
-#ifndef faust_djembeRev_h_
-#define faust_djembeRev_h_
+#ifndef faust_SineSweep_h_
+#define faust_SineSweep_h_
 
 #include <string>
 #include "freertos/FreeRTOS.h"
@@ -39,7 +39,7 @@ class MidiUI;
 class esp32_midi;
 #endif
 
-class djembeRev
+class SineSweep
 {
     private:
     
@@ -53,8 +53,8 @@ class djembeRev
 
     public:
     
-        djembeRev(int sample_rate, int buffer_size);
-        ~djembeRev();
+        SineSweep(int sample_rate, int buffer_size);
+        ~SineSweep();
     
         bool start();
         void stop();

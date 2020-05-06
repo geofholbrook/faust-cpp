@@ -34,14 +34,14 @@ void app_main(void)
     wm8978.lineinGain(0);
 
     // Set gain
-    wm8978.spkVolSet(60); // [0-63]
+    wm8978.spkVolSet(50); // [0-63]
     
     wm8978.hpVolSet(40,40);
     wm8978.i2sCfg(2,0);
     
     
     // Allocate and start Faust DSP
-    djembeRev* DSP = new djembeRev(44100, 32);
+    SineSweep* DSP = new SineSweep(44100, 32);
     DSP->start();
     
     // Waiting forever
