@@ -1,6 +1,6 @@
 // Options :
 /* ------------------------------------------------------------
-name: "DjembeGroove"
+name: "EchoTest"
 Code generated with Faust 2.23.6 (https://faust.grame.fr)
 Compilation options: -lang cpp -scal -ftz 0
 ------------------------------------------------------------ */
@@ -8140,11 +8140,7 @@ struct dsp_poly_factory : public dsp_factory {
 
 #include <algorithm>
 #include <cmath>
-#include <math.h>
 
-static float mydsp_faustpower2_f(float value) {
-	return (value * value);
-}
 
 #ifndef FAUSTCLASS 
 #define FAUSTCLASS mydsp
@@ -8159,164 +8155,35 @@ class mydsp : public dsp {
 	
  public:
 	
+	int IOTA;
+	float fRec0[8192];
+	float fRec1[8192];
 	int fSampleRate;
-	float fConst0;
-	float fConst1;
-	float fConst2;
-	float fConst3;
-	float fConst4;
-	float fConst5;
-	float fConst6;
-	float fConst7;
-	float fConst8;
-	int iVec0[2];
-	int iRec3[2];
-	float fConst9;
-	float fConst10;
-	float fRec2[3];
-	float fConst11;
-	float fConst12;
-	float fConst13;
-	float fRec1[3];
-	float fConst14;
-	int iRec5[2];
-	int iRec6[2];
-	int iVec1[2];
-	int iRec4[2];
-	float fConst15;
-	float fConst16;
-	float fConst17;
-	float fRec0[3];
-	float fConst18;
-	float fConst19;
-	float fConst20;
-	float fRec7[3];
-	float fConst21;
-	float fConst22;
-	float fConst23;
-	float fRec8[3];
-	float fConst24;
-	float fConst25;
-	float fConst26;
-	float fRec9[3];
-	float fConst27;
-	float fConst28;
-	float fConst29;
-	float fRec10[3];
-	float fConst30;
-	float fConst31;
-	float fConst32;
-	float fRec11[3];
-	float fConst33;
-	float fConst34;
-	float fConst35;
-	float fRec12[3];
-	float fConst36;
-	float fConst37;
-	float fConst38;
-	float fRec13[3];
-	float fConst39;
-	float fConst40;
-	float fConst41;
-	float fRec14[3];
-	float fConst42;
-	float fConst43;
-	float fConst44;
-	float fRec15[3];
-	float fConst45;
-	float fConst46;
-	float fConst47;
-	float fRec16[3];
-	float fConst48;
-	float fConst49;
-	float fConst50;
-	float fRec17[3];
-	float fConst51;
-	float fConst52;
-	float fConst53;
-	float fRec18[3];
-	float fConst54;
-	float fConst55;
-	float fConst56;
-	float fRec19[3];
-	float fConst57;
-	float fConst58;
-	float fConst59;
-	float fRec20[3];
-	float fConst60;
-	float fConst61;
-	float fConst62;
-	float fRec21[3];
-	float fConst63;
-	float fConst64;
-	float fConst65;
-	float fRec22[3];
-	float fConst66;
-	float fConst67;
-	float fConst68;
-	float fRec23[3];
-	float fConst69;
-	float fConst70;
-	float fConst71;
-	float fRec24[3];
-	float fConst72;
-	float fConst73;
-	float fConst74;
-	float fRec25[3];
 	
  public:
 	
 	void metadata(Meta* m) { 
-		m->declare("basics.lib/name", "Faust Basic Element Library");
-		m->declare("basics.lib/version", "0.1");
-		m->declare("envelopes.lib/ar:author", "Yann Orlarey, Stéphane Letz");
-		m->declare("envelopes.lib/author", "GRAME");
-		m->declare("envelopes.lib/copyright", "GRAME");
-		m->declare("envelopes.lib/license", "LGPL with exception");
-		m->declare("envelopes.lib/name", "Faust Envelope Library");
-		m->declare("envelopes.lib/version", "0.1");
-		m->declare("filename", "DjembeGroove.dsp");
-		m->declare("filters.lib/fir:author", "Julius O. Smith III");
-		m->declare("filters.lib/fir:copyright", "Copyright (C) 2003-2019 by Julius O. Smith III <jos@ccrma.stanford.edu>");
-		m->declare("filters.lib/fir:license", "MIT-style STK-4.3 license");
-		m->declare("filters.lib/highpass:author", "Julius O. Smith III");
-		m->declare("filters.lib/highpass:copyright", "Copyright (C) 2003-2019 by Julius O. Smith III <jos@ccrma.stanford.edu>");
-		m->declare("filters.lib/iir:author", "Julius O. Smith III");
-		m->declare("filters.lib/iir:copyright", "Copyright (C) 2003-2019 by Julius O. Smith III <jos@ccrma.stanford.edu>");
-		m->declare("filters.lib/iir:license", "MIT-style STK-4.3 license");
-		m->declare("filters.lib/lowpass0_highpass1", "Copyright (C) 2003-2019 by Julius O. Smith III <jos@ccrma.stanford.edu>");
-		m->declare("filters.lib/lowpass0_highpass1:author", "Julius O. Smith III");
-		m->declare("filters.lib/lowpass:author", "Julius O. Smith III");
-		m->declare("filters.lib/lowpass:copyright", "Copyright (C) 2003-2019 by Julius O. Smith III <jos@ccrma.stanford.edu>");
-		m->declare("filters.lib/lowpass:license", "MIT-style STK-4.3 license");
-		m->declare("filters.lib/name", "Faust Filters Library");
-		m->declare("filters.lib/tf2:author", "Julius O. Smith III");
-		m->declare("filters.lib/tf2:copyright", "Copyright (C) 2003-2019 by Julius O. Smith III <jos@ccrma.stanford.edu>");
-		m->declare("filters.lib/tf2:license", "MIT-style STK-4.3 license");
-		m->declare("filters.lib/tf2s:author", "Julius O. Smith III");
-		m->declare("filters.lib/tf2s:copyright", "Copyright (C) 2003-2019 by Julius O. Smith III <jos@ccrma.stanford.edu>");
-		m->declare("filters.lib/tf2s:license", "MIT-style STK-4.3 license");
-		m->declare("maths.lib/author", "GRAME");
-		m->declare("maths.lib/copyright", "GRAME");
-		m->declare("maths.lib/license", "LGPL with exception");
-		m->declare("maths.lib/name", "Faust Math Library");
-		m->declare("maths.lib/version", "2.2");
-		m->declare("name", "DjembeGroove");
-		m->declare("noises.lib/name", "Faust Noise Generator Library");
-		m->declare("noises.lib/version", "0.0");
-		m->declare("platform.lib/name", "Generic Platform Library");
-		m->declare("platform.lib/version", "0.1");
+		m->declare("filename", "EchoTest.dsp");
+		m->declare("name", "EchoTest");
+		m->declare("routes.lib/name", "Faust Signal Routing Library");
+		m->declare("routes.lib/version", "0.1");
+		m->declare("spats.lib/name", "Faust Spatialization Library");
+		m->declare("spats.lib/version", "0.0");
 	}
 
 	virtual int getNumInputs() {
-		return 0;
+		return 1;
 	}
 	virtual int getNumOutputs() {
-		return 1;
+		return 2;
 	}
 	virtual int getInputRate(int channel) {
 		int rate;
 		switch ((channel)) {
+			case 0: {
+				rate = 1;
+				break;
+			}
 			default: {
 				rate = -1;
 				break;
@@ -8328,6 +8195,10 @@ class mydsp : public dsp {
 		int rate;
 		switch ((channel)) {
 			case 0: {
+				rate = 1;
+				break;
+			}
+			case 1: {
 				rate = 1;
 				break;
 			}
@@ -8344,170 +8215,18 @@ class mydsp : public dsp {
 	
 	virtual void instanceConstants(int sample_rate) {
 		fSampleRate = sample_rate;
-		fConst0 = std::min<float>(192000.0f, std::max<float>(1.0f, float(fSampleRate)));
-		fConst1 = std::tan((25132.7422f / fConst0));
-		fConst2 = (1.0f / fConst1);
-		fConst3 = (1.0f / (((fConst2 + 1.41421354f) / fConst1) + 1.0f));
-		fConst4 = std::tan((911.06189f / fConst0));
-		fConst5 = (1.0f / fConst4);
-		fConst6 = (1.0f / (((fConst5 + 1.41421354f) / fConst4) + 1.0f));
-		fConst7 = mydsp_faustpower2_f(fConst4);
-		fConst8 = (1.0f / fConst7);
-		fConst9 = (((fConst5 + -1.41421354f) / fConst4) + 1.0f);
-		fConst10 = (2.0f * (1.0f - fConst8));
-		fConst11 = (0.0f - (2.0f / fConst7));
-		fConst12 = (((fConst2 + -1.41421354f) / fConst1) + 1.0f);
-		fConst13 = (2.0f * (1.0f - (1.0f / mydsp_faustpower2_f(fConst1))));
-		fConst14 = (1.0f / std::max<float>(1.0f, (0.00100000005f * fConst0)));
-		fConst15 = std::pow(0.00100000005f, (1.66666663f / fConst0));
-		fConst16 = (std::cos((376.991119f / fConst0)) * (0.0f - (2.0f * fConst15)));
-		fConst17 = mydsp_faustpower2_f(fConst15);
-		fConst18 = std::pow(0.00100000005f, (1.75438595f / fConst0));
-		fConst19 = (std::cos((1633.62817f / fConst0)) * (0.0f - (2.0f * fConst18)));
-		fConst20 = mydsp_faustpower2_f(fConst18);
-		fConst21 = std::pow(0.00100000005f, (1.85185182f / fConst0));
-		fConst22 = (std::cos((2890.26514f / fConst0)) * (0.0f - (2.0f * fConst21)));
-		fConst23 = mydsp_faustpower2_f(fConst21);
-		fConst24 = std::pow(0.00100000005f, (1.96078432f / fConst0));
-		fConst25 = (std::cos((4146.90234f / fConst0)) * (0.0f - (2.0f * fConst24)));
-		fConst26 = mydsp_faustpower2_f(fConst24);
-		fConst27 = std::pow(0.00100000005f, (2.08333325f / fConst0));
-		fConst28 = (std::cos((5403.53955f / fConst0)) * (0.0f - (2.0f * fConst27)));
-		fConst29 = mydsp_faustpower2_f(fConst27);
-		fConst30 = std::pow(0.00100000005f, (2.22222233f / fConst0));
-		fConst31 = (std::cos((6660.17627f / fConst0)) * (0.0f - (2.0f * fConst30)));
-		fConst32 = mydsp_faustpower2_f(fConst30);
-		fConst33 = std::pow(0.00100000005f, (2.38095236f / fConst0));
-		fConst34 = (std::cos((7916.81348f / fConst0)) * (0.0f - (2.0f * fConst33)));
-		fConst35 = mydsp_faustpower2_f(fConst33);
-		fConst36 = std::pow(0.00100000005f, (2.56410265f / fConst0));
-		fConst37 = (std::cos((9173.4502f / fConst0)) * (0.0f - (2.0f * fConst36)));
-		fConst38 = mydsp_faustpower2_f(fConst36);
-		fConst39 = std::pow(0.00100000005f, (2.77777767f / fConst0));
-		fConst40 = (std::cos((10430.0879f / fConst0)) * (0.0f - (2.0f * fConst39)));
-		fConst41 = mydsp_faustpower2_f(fConst39);
-		fConst42 = std::pow(0.00100000005f, (3.030303f / fConst0));
-		fConst43 = (std::cos((11686.7246f / fConst0)) * (0.0f - (2.0f * fConst42)));
-		fConst44 = mydsp_faustpower2_f(fConst42);
-		fConst45 = std::pow(0.00100000005f, (3.33333325f / fConst0));
-		fConst46 = (std::cos((12943.3613f / fConst0)) * (0.0f - (2.0f * fConst45)));
-		fConst47 = mydsp_faustpower2_f(fConst45);
-		fConst48 = std::pow(0.00100000005f, (3.70370364f / fConst0));
-		fConst49 = (std::cos((14199.999f / fConst0)) * (0.0f - (2.0f * fConst48)));
-		fConst50 = mydsp_faustpower2_f(fConst48);
-		fConst51 = std::pow(0.00100000005f, (4.16666651f / fConst0));
-		fConst52 = (std::cos((15456.6357f / fConst0)) * (0.0f - (2.0f * fConst51)));
-		fConst53 = mydsp_faustpower2_f(fConst51);
-		fConst54 = std::pow(0.00100000005f, (4.76190472f / fConst0));
-		fConst55 = (std::cos((16713.2734f / fConst0)) * (0.0f - (2.0f * fConst54)));
-		fConst56 = mydsp_faustpower2_f(fConst54);
-		fConst57 = std::pow(0.00100000005f, (5.55555534f / fConst0));
-		fConst58 = (std::cos((17969.9102f / fConst0)) * (0.0f - (2.0f * fConst57)));
-		fConst59 = mydsp_faustpower2_f(fConst57);
-		fConst60 = std::pow(0.00100000005f, (6.66666651f / fConst0));
-		fConst61 = (std::cos((19226.5469f / fConst0)) * (0.0f - (2.0f * fConst60)));
-		fConst62 = mydsp_faustpower2_f(fConst60);
-		fConst63 = std::pow(0.00100000005f, (8.33333302f / fConst0));
-		fConst64 = (std::cos((20483.1836f / fConst0)) * (0.0f - (2.0f * fConst63)));
-		fConst65 = mydsp_faustpower2_f(fConst63);
-		fConst66 = std::pow(0.00100000005f, (11.1111107f / fConst0));
-		fConst67 = (std::cos((21739.8203f / fConst0)) * (0.0f - (2.0f * fConst66)));
-		fConst68 = mydsp_faustpower2_f(fConst66);
-		fConst69 = std::pow(0.00100000005f, (16.666666f / fConst0));
-		fConst70 = (std::cos((22996.459f / fConst0)) * (0.0f - (2.0f * fConst69)));
-		fConst71 = mydsp_faustpower2_f(fConst69);
-		fConst72 = std::pow(0.00100000005f, (33.3333321f / fConst0));
-		fConst73 = (std::cos((24253.0957f / fConst0)) * (0.0f - (2.0f * fConst72)));
-		fConst74 = mydsp_faustpower2_f(fConst72);
 	}
 	
 	virtual void instanceResetUserInterface() {
 	}
 	
 	virtual void instanceClear() {
-		for (int l0 = 0; (l0 < 2); l0 = (l0 + 1)) {
-			iVec0[l0] = 0;
+		IOTA = 0;
+		for (int l0 = 0; (l0 < 8192); l0 = (l0 + 1)) {
+			fRec0[l0] = 0.0f;
 		}
-		for (int l1 = 0; (l1 < 2); l1 = (l1 + 1)) {
-			iRec3[l1] = 0;
-		}
-		for (int l2 = 0; (l2 < 3); l2 = (l2 + 1)) {
-			fRec2[l2] = 0.0f;
-		}
-		for (int l3 = 0; (l3 < 3); l3 = (l3 + 1)) {
-			fRec1[l3] = 0.0f;
-		}
-		for (int l4 = 0; (l4 < 2); l4 = (l4 + 1)) {
-			iRec5[l4] = 0;
-		}
-		for (int l5 = 0; (l5 < 2); l5 = (l5 + 1)) {
-			iRec6[l5] = 0;
-		}
-		for (int l6 = 0; (l6 < 2); l6 = (l6 + 1)) {
-			iVec1[l6] = 0;
-		}
-		for (int l7 = 0; (l7 < 2); l7 = (l7 + 1)) {
-			iRec4[l7] = 0;
-		}
-		for (int l8 = 0; (l8 < 3); l8 = (l8 + 1)) {
-			fRec0[l8] = 0.0f;
-		}
-		for (int l9 = 0; (l9 < 3); l9 = (l9 + 1)) {
-			fRec7[l9] = 0.0f;
-		}
-		for (int l10 = 0; (l10 < 3); l10 = (l10 + 1)) {
-			fRec8[l10] = 0.0f;
-		}
-		for (int l11 = 0; (l11 < 3); l11 = (l11 + 1)) {
-			fRec9[l11] = 0.0f;
-		}
-		for (int l12 = 0; (l12 < 3); l12 = (l12 + 1)) {
-			fRec10[l12] = 0.0f;
-		}
-		for (int l13 = 0; (l13 < 3); l13 = (l13 + 1)) {
-			fRec11[l13] = 0.0f;
-		}
-		for (int l14 = 0; (l14 < 3); l14 = (l14 + 1)) {
-			fRec12[l14] = 0.0f;
-		}
-		for (int l15 = 0; (l15 < 3); l15 = (l15 + 1)) {
-			fRec13[l15] = 0.0f;
-		}
-		for (int l16 = 0; (l16 < 3); l16 = (l16 + 1)) {
-			fRec14[l16] = 0.0f;
-		}
-		for (int l17 = 0; (l17 < 3); l17 = (l17 + 1)) {
-			fRec15[l17] = 0.0f;
-		}
-		for (int l18 = 0; (l18 < 3); l18 = (l18 + 1)) {
-			fRec16[l18] = 0.0f;
-		}
-		for (int l19 = 0; (l19 < 3); l19 = (l19 + 1)) {
-			fRec17[l19] = 0.0f;
-		}
-		for (int l20 = 0; (l20 < 3); l20 = (l20 + 1)) {
-			fRec18[l20] = 0.0f;
-		}
-		for (int l21 = 0; (l21 < 3); l21 = (l21 + 1)) {
-			fRec19[l21] = 0.0f;
-		}
-		for (int l22 = 0; (l22 < 3); l22 = (l22 + 1)) {
-			fRec20[l22] = 0.0f;
-		}
-		for (int l23 = 0; (l23 < 3); l23 = (l23 + 1)) {
-			fRec21[l23] = 0.0f;
-		}
-		for (int l24 = 0; (l24 < 3); l24 = (l24 + 1)) {
-			fRec22[l24] = 0.0f;
-		}
-		for (int l25 = 0; (l25 < 3); l25 = (l25 + 1)) {
-			fRec23[l25] = 0.0f;
-		}
-		for (int l26 = 0; (l26 < 3); l26 = (l26 + 1)) {
-			fRec24[l26] = 0.0f;
-		}
-		for (int l27 = 0; (l27 < 3); l27 = (l27 + 1)) {
-			fRec25[l27] = 0.0f;
+		for (int l1 = 0; (l1 < 8192); l1 = (l1 + 1)) {
+			fRec1[l1] = 0.0f;
 		}
 	}
 	
@@ -8530,95 +8249,21 @@ class mydsp : public dsp {
 	}
 	
 	virtual void buildUserInterface(UI* ui_interface) {
-		ui_interface->openVerticalBox("DjembeGroove");
+		ui_interface->openVerticalBox("EchoTest");
 		ui_interface->closeBox();
 	}
 	
 	virtual void compute(int count, FAUSTFLOAT** inputs, FAUSTFLOAT** outputs) {
+		FAUSTFLOAT* input0 = inputs[0];
 		FAUSTFLOAT* output0 = outputs[0];
+		FAUSTFLOAT* output1 = outputs[1];
 		for (int i = 0; (i < count); i = (i + 1)) {
-			iVec0[0] = 1;
-			iRec3[0] = ((1103515245 * iRec3[1]) + 12345);
-			fRec2[0] = ((4.65661287e-10f * float(iRec3[0])) - (fConst6 * ((fConst9 * fRec2[2]) + (fConst10 * fRec2[1]))));
-			fRec1[0] = ((fConst6 * (((fConst8 * fRec2[0]) + (fConst11 * fRec2[1])) + (fConst8 * fRec2[2]))) - (fConst3 * ((fConst12 * fRec1[2]) + (fConst13 * fRec1[1]))));
-			iRec5[0] = ((iVec0[1] + iRec5[1]) % 44100);
-			iRec6[0] = ((iVec0[1] + iRec6[1]) % 13230);
-			int iTemp0 = ((iRec5[0] < 1) + (iRec6[0] < 1));
-			iVec1[0] = iTemp0;
-			iRec4[0] = (((iRec4[1] + (iRec4[1] > 0)) * (iTemp0 <= iVec1[1])) + (iTemp0 > iVec1[1]));
-			float fTemp1 = (fConst14 * float(iRec4[0]));
-			float fTemp2 = (fConst3 * ((fRec1[2] + (fRec1[0] + (2.0f * fRec1[1]))) * std::max<float>(0.0f, std::min<float>(fTemp1, (2.0f - fTemp1)))));
-			fRec0[0] = (fTemp2 - ((fConst16 * fRec0[1]) + (fConst17 * fRec0[2])));
-			fRec7[0] = (fTemp2 - ((fConst19 * fRec7[1]) + (fConst20 * fRec7[2])));
-			fRec8[0] = (fTemp2 - ((fConst22 * fRec8[1]) + (fConst23 * fRec8[2])));
-			fRec9[0] = (fTemp2 - ((fConst25 * fRec9[1]) + (fConst26 * fRec9[2])));
-			fRec10[0] = (fTemp2 - ((fConst28 * fRec10[1]) + (fConst29 * fRec10[2])));
-			fRec11[0] = (fTemp2 - ((fConst31 * fRec11[1]) + (fConst32 * fRec11[2])));
-			fRec12[0] = (fTemp2 - ((fConst34 * fRec12[1]) + (fConst35 * fRec12[2])));
-			fRec13[0] = (fTemp2 - ((fConst37 * fRec13[1]) + (fConst38 * fRec13[2])));
-			fRec14[0] = (fTemp2 - ((fConst40 * fRec14[1]) + (fConst41 * fRec14[2])));
-			fRec15[0] = (fTemp2 - ((fConst43 * fRec15[1]) + (fConst44 * fRec15[2])));
-			fRec16[0] = (fTemp2 - ((fConst46 * fRec16[1]) + (fConst47 * fRec16[2])));
-			fRec17[0] = (fTemp2 - ((fConst49 * fRec17[1]) + (fConst50 * fRec17[2])));
-			fRec18[0] = (fTemp2 - ((fConst52 * fRec18[1]) + (fConst53 * fRec18[2])));
-			fRec19[0] = (fTemp2 - ((fConst55 * fRec19[1]) + (fConst56 * fRec19[2])));
-			fRec20[0] = (fTemp2 - ((fConst58 * fRec20[1]) + (fConst59 * fRec20[2])));
-			fRec21[0] = (fTemp2 - ((fConst61 * fRec21[1]) + (fConst62 * fRec21[2])));
-			fRec22[0] = (fTemp2 - ((fConst64 * fRec22[1]) + (fConst65 * fRec22[2])));
-			fRec23[0] = (fTemp2 - ((fConst67 * fRec23[1]) + (fConst68 * fRec23[2])));
-			fRec24[0] = (fTemp2 - ((fConst70 * fRec24[1]) + (fConst71 * fRec24[2])));
-			fRec25[0] = (fTemp2 - ((fConst73 * fRec25[1]) + (fConst74 * fRec25[2])));
-			output0[i] = FAUSTFLOAT((0.0500000007f * ((((((((((((((((((((fRec0[0] + (0.25f * (fRec7[0] - fRec7[2]))) + (0.111111112f * (fRec8[0] - fRec8[2]))) + (0.0625f * (fRec9[0] - fRec9[2]))) + (0.0399999991f * (fRec10[0] - fRec10[2]))) + (0.027777778f * (fRec11[0] - fRec11[2]))) + (0.0204081628f * (fRec12[0] - fRec12[2]))) + (0.015625f * (fRec13[0] - fRec13[2]))) + (0.0123456791f * (fRec14[0] - fRec14[2]))) + (0.00999999978f * (fRec15[0] - fRec15[2]))) + (0.00826446246f * (fRec16[0] - fRec16[2]))) + (0.0069444445f * (fRec17[0] - fRec17[2]))) + (0.00591715984f * (fRec18[0] - fRec18[2]))) + (0.00510204071f * (fRec19[0] - fRec19[2]))) + (0.00444444455f * (fRec20[0] - fRec20[2]))) + (0.00390625f * (fRec21[0] - fRec21[2]))) + (0.00346020772f * (fRec22[0] - fRec22[2]))) + (0.00308641978f * (fRec23[0] - fRec23[2]))) + (0.00277008303f * (fRec24[0] - fRec24[2]))) + (0.00249999994f * (fRec25[0] - fRec25[2]))) - fRec0[2])));
-			iVec0[1] = iVec0[0];
-			iRec3[1] = iRec3[0];
-			fRec2[2] = fRec2[1];
-			fRec2[1] = fRec2[0];
-			fRec1[2] = fRec1[1];
-			fRec1[1] = fRec1[0];
-			iRec5[1] = iRec5[0];
-			iRec6[1] = iRec6[0];
-			iVec1[1] = iVec1[0];
-			iRec4[1] = iRec4[0];
-			fRec0[2] = fRec0[1];
-			fRec0[1] = fRec0[0];
-			fRec7[2] = fRec7[1];
-			fRec7[1] = fRec7[0];
-			fRec8[2] = fRec8[1];
-			fRec8[1] = fRec8[0];
-			fRec9[2] = fRec9[1];
-			fRec9[1] = fRec9[0];
-			fRec10[2] = fRec10[1];
-			fRec10[1] = fRec10[0];
-			fRec11[2] = fRec11[1];
-			fRec11[1] = fRec11[0];
-			fRec12[2] = fRec12[1];
-			fRec12[1] = fRec12[0];
-			fRec13[2] = fRec13[1];
-			fRec13[1] = fRec13[0];
-			fRec14[2] = fRec14[1];
-			fRec14[1] = fRec14[0];
-			fRec15[2] = fRec15[1];
-			fRec15[1] = fRec15[0];
-			fRec16[2] = fRec16[1];
-			fRec16[1] = fRec16[0];
-			fRec17[2] = fRec17[1];
-			fRec17[1] = fRec17[0];
-			fRec18[2] = fRec18[1];
-			fRec18[1] = fRec18[0];
-			fRec19[2] = fRec19[1];
-			fRec19[1] = fRec19[0];
-			fRec20[2] = fRec20[1];
-			fRec20[1] = fRec20[0];
-			fRec21[2] = fRec21[1];
-			fRec21[1] = fRec21[0];
-			fRec22[2] = fRec22[1];
-			fRec22[1] = fRec22[0];
-			fRec23[2] = fRec23[1];
-			fRec23[1] = fRec23[0];
-			fRec24[2] = fRec24[1];
-			fRec24[1] = fRec24[0];
-			fRec25[2] = fRec25[1];
-			fRec25[1] = fRec25[0];
+			float fTemp0 = float(input0[i]);
+			fRec0[(IOTA & 8191)] = (fTemp0 + (0.5f * fRec0[((IOTA - 5001) & 8191)]));
+			fRec1[(IOTA & 8191)] = (fTemp0 + (0.5f * fRec1[((IOTA - 5001) & 8191)]));
+			output0[i] = FAUSTFLOAT(fRec0[((IOTA - 0) & 8191)]);
+			output1[i] = FAUSTFLOAT(fRec1[((IOTA - 0) & 8191)]);
+			IOTA = (IOTA + 1);
 		}
 	}
 
@@ -8626,8 +8271,8 @@ class mydsp : public dsp {
 
 #ifdef FAUST_UIMACROS
 	#define FAUST_CLASS_NAME "mydsp"
-	#define FAUST_INPUTS 0
-	#define FAUST_OUTPUTS 1
+	#define FAUST_INPUTS 1
+	#define FAUST_OUTPUTS 2
 	#define FAUST_ACTIVES 0
 	#define FAUST_PASSIVES 0
 #endif
@@ -8641,7 +8286,7 @@ std::list<GUI*> GUI::fGuiList;
 ztimedmap GUI::gTimedZoneMap;
 #endif
 
-DjembeGroove::DjembeGroove(int sample_rate, int buffer_size)
+EchoTest::EchoTest(int sample_rate, int buffer_size)
 {
     fUI = new MapUI();
     fAudio = new esp32audio(sample_rate, buffer_size);
@@ -8667,7 +8312,7 @@ DjembeGroove::DjembeGroove(int sample_rate, int buffer_size)
 #endif
 }
 
-DjembeGroove::~DjembeGroove()
+EchoTest::~EchoTest()
 {
     delete fDSP;
     delete fUI;
@@ -8678,7 +8323,7 @@ DjembeGroove::~DjembeGroove()
 #endif
 }
 
-bool DjembeGroove::start()
+bool EchoTest::start()
 {
 #ifdef MIDICTRL
     if (!fMIDIInterface->run()) return false;
@@ -8686,7 +8331,7 @@ bool DjembeGroove::start()
     return fAudio->start();
 }
 
-void DjembeGroove::stop()
+void EchoTest::stop()
 {
 #ifdef MIDICTRL
     fMIDIInterface->stop();
@@ -8694,12 +8339,12 @@ void DjembeGroove::stop()
     fAudio->stop();
 }
 
-void DjembeGroove::setParamValue(const std::string& path, float value)
+void EchoTest::setParamValue(const std::string& path, float value)
 {
     fUI->setParamValue(path, value);
 }
 
-float DjembeGroove::getParamValue(const std::string& path)
+float EchoTest::getParamValue(const std::string& path)
 {
     return fUI->getParamValue(path);
 }
@@ -8725,7 +8370,7 @@ extern "C" void app_main()
     wm8978.i2sCfg(2,0);
     
     // Allocate and start Faust DSP
-    DjembeGroove* DSP = new DjembeGroove(48000, 32);
+    EchoTest* DSP = new EchoTest(48000, 32);
     DSP->start();
     
     // Waiting forever

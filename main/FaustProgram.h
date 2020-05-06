@@ -23,8 +23,8 @@
  
  ************************************************************************/
 
-#ifndef faust_DjembeGroove_h_
-#define faust_DjembeGroove_h_
+#ifndef faust_EchoTest_h_
+#define faust_EchoTest_h_
 
 #include <string>
 #include "freertos/FreeRTOS.h"
@@ -39,7 +39,7 @@ class MidiUI;
 class esp32_midi;
 #endif
 
-class DjembeGroove
+class EchoTest
 {
     private:
     
@@ -53,8 +53,8 @@ class DjembeGroove
 
     public:
     
-        DjembeGroove(int sample_rate, int buffer_size);
-        ~DjembeGroove();
+        EchoTest(int sample_rate, int buffer_size);
+        ~EchoTest();
     
         bool start();
         void stop();
