@@ -33,11 +33,10 @@ sed -i "" "s/ftbl0mydspSIG0\[65536\]/ftbl0mydspSIG0\[65536\] EXT_RAM_ATTR/g" ./m
 rm "${MODULENAME}.zip"
 rm -rf ./${MODULENAME}
 
-
 # replace reference to faust instrument in template and create main.cpp
-sed "s/%ModuleName%/${MODULENAME}/g" ./main/main-template.txt > ./main/main.cpp
+sed "s/%ModuleName%/${MODULENAME}/g" ./main/main-template.cpp > ./main/main.cpp
 
 # make esp-idf tools available in shell, compile, and flash
 source ${ESP_IDF_PATH}/export.sh
 idf.py build 
-idf.py -p $(read_var PORT .env) flash
+idf.py -p $(read_var PORT .env) flash monitor
