@@ -3,4 +3,6 @@ build
 .env
 .vscode
 
+# generated files
 main/FaustProgram.*
+main/dsp.cpp
