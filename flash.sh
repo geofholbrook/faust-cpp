@@ -34,7 +34,9 @@ rm "${MODULENAME}.zip"
 rm -rf ./${MODULENAME}
 
 # replace reference to faust instrument in template and create main.cpp
-sed "s/%ModuleName%/${MODULENAME}/g" ./main/main-template.cpp > ./main/main.cpp
+# sed "s/%ModuleName%/${MODULENAME}/g" ./main/main-template.cpp > ./main/main.cpp
+
+sed "s/%ModuleName%/${MODULENAME}/g" ./main/dsp-template.txt > ./main/dsp.cpp
 
 # make esp-idf tools available in shell, compile, and flash
 source ${ESP_IDF_PATH}/export.sh

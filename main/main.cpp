@@ -15,13 +15,14 @@
 
 #include "WM8978.h"
 #include "WM8978.cpp"
-#include "FaustProgram.h"
-#include "FaustProgram.cpp"
+
 
 #define LOG_LOCAL_LEVEL ESP_LOG_VERBOSE
 #include "esp_log.h"
 
 #include "udp_server.cpp"
+
+#include "dsp.h"
 
 extern "C" void app_main();
 
@@ -43,12 +44,10 @@ void app_main(void)
     // Set gain
     wm8978.spkVolSet(50); // [0-63]
     
-    wm8978.hpVolSet(40,40);
+    wm8978.hpVolSet(10,10);
     wm8978.i2sCfg(2,0);
     
-    // Allocate and start Faust DSP
-    Djembe* DSP = new Djembe(44100, 32);
-    DSP->start();
+    faust_start();
     
     // Waiting forever
     vTaskSuspend(nullptr);

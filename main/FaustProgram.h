@@ -23,8 +23,8 @@
  
  ************************************************************************/
 
-#ifndef faust_Djembe_h_
-#define faust_Djembe_h_
+#ifndef faust_Sawtooth_h_
+#define faust_Sawtooth_h_
 
 #include <string>
 #include "freertos/FreeRTOS.h"
@@ -39,7 +39,7 @@ class MidiUI;
 class esp32_midi;
 #endif
 
-class Djembe
+class Sawtooth
 {
     private:
     
@@ -53,8 +53,8 @@ class Djembe
 
     public:
     
-        Djembe(int sample_rate, int buffer_size);
-        ~Djembe();
+        Sawtooth(int sample_rate, int buffer_size);
+        ~Sawtooth();
     
         bool start();
         void stop();

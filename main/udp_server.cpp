@@ -23,6 +23,9 @@
 #include "lwip/sys.h"
 #include <lwip/netdb.h>
 
+#include "udp_callback.cpp"
+
+
 #define PORT CONFIG_EXAMPLE_PORT
 
 static const char *TAG = "example";
@@ -35,6 +38,7 @@ void log_test()
 
 static void udp_server_task(void *pvParameters)
 {
+
     char rx_buffer[128];
     char addr_str[128];
     int addr_family = (int)pvParameters;
@@ -82,9 +86,14 @@ static void udp_server_task(void *pvParameters)
         while (1) {
 
             ESP_LOGI(TAG, "Waiting for data");
+            
             struct sockaddr_in6 source_addr; // Large enough for both IPv4 or IPv6
             socklen_t socklen = sizeof(source_addr);
+            
+            // this appears to be blocking. is that a a problem?
             int len = recvfrom(sock, rx_buffer, sizeof(rx_buffer) - 1, 0, (struct sockaddr *)&source_addr, &socklen);
+
+
 
             // Error occurred during receiving
             if (len < 0) {
@@ -101,10 +110,15 @@ static void udp_server_task(void *pvParameters)
                 }
 
                 rx_buffer[len] = 0; // Null-terminate whatever we received and treat like a string...
+                
+                udp_callback(rx_buffer);
+                
                 ESP_LOGI(TAG, "Received %d bytes from %s:", len, addr_str);
                 ESP_LOGI(TAG, "%s", rx_buffer);
 
+                // echo
                 int err = sendto(sock, rx_buffer, len, 0, (struct sockaddr *)&source_addr, sizeof(source_addr));
+                
                 if (err < 0) {
                     ESP_LOGE(TAG, "Error occurred during sending: errno %d", errno);
                     break;
@@ -125,7 +139,7 @@ static void udp_server_task(void *pvParameters)
 
 void udp_main(void)
 {
-    
+
     ESP_ERROR_CHECK(nvs_flash_init());
     ESP_ERROR_CHECK(esp_netif_init());
     ESP_ERROR_CHECK(esp_event_loop_create_default());
