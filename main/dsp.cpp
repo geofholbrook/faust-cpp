@@ -2,11 +2,11 @@
 #include "FaustProgram.h"
 #include "FaustProgram.cpp"
 
-Sawtooth *DSP;
+Djembe *DSP;
 
 void faust_start() {
     // Allocate and start Faust DSP
-    DSP = new Sawtooth(44100, 32);
+    DSP = new Djembe(44100, 32);
     DSP->start();
 }
 

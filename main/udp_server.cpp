@@ -85,7 +85,7 @@ static void udp_server_task(void *pvParameters)
 
         while (1) {
 
-            ESP_LOGI(TAG, "Waiting for data");
+            // ESP_LOGI(TAG, "Waiting for data");
             
             struct sockaddr_in6 source_addr; // Large enough for both IPv4 or IPv6
             socklen_t socklen = sizeof(source_addr);
@@ -113,8 +113,8 @@ static void udp_server_task(void *pvParameters)
                 
                 udp_callback(rx_buffer);
                 
-                ESP_LOGI(TAG, "Received %d bytes from %s:", len, addr_str);
-                ESP_LOGI(TAG, "%s", rx_buffer);
+                // ESP_LOGI(TAG, "Received %d bytes from %s:", len, addr_str);
+                // ESP_LOGI(TAG, "%s", rx_buffer);
 
                 // echo
                 int err = sendto(sock, rx_buffer, len, 0, (struct sockaddr *)&source_addr, sizeof(source_addr));
