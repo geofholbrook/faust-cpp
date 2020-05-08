@@ -28,7 +28,6 @@ extern "C" void app_main();
 
 void app_main(void)
 {
-
     udp_main();
 
     // Init audio codec

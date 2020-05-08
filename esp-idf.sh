@@ -10,7 +10,7 @@ source ${ESP_IDF_PATH}/export.sh
 
 if [ "$1" == "flash" ]
 then
-    idf.py -p $(read_var PORT .env) flash monitor
+    idf.py -p $(read_var PORT .env) flash
 else
     idf.py $1
 fi

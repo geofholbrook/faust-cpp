@@ -1,4 +1,4 @@
-# Flash a Faust DSP program to ESP32
+# Flash a Faust DSP program to ESP32, control parameters via UDP
 ... in our case, on the TTGO TAudio board
 
 Based on [these instructions](
@@ -11,18 +11,38 @@ This repo consists of a script, `flash.sh`, and a template, rendering most of th
 You can develop, test and download your .dsp file using the [online Faust editor](https://faust.grame.fr/editor/).
 
 in the terminal, make sure you are navigated to the root of this repo.
-make sure the board is connected for flashing.
-run 
+
+1. (you have to do this only once, or again if someone else has done it and pushed to the repo ... to be fixed!)
+```
+sh ./esp-idf.sh menuconfig
+```
+navigate to 'Example Connection Configuration' and enter your wifi credentials.
+
+2. Make sure the board is connected for flashing, then:
 ```
 sh ./flash.sh <path-to-DSP-file>
 ```
 
 (It probably makes sense to put your .dsp files in the faust-code folder, then it becomes sh ./flash.sh ./faust-code/CoolFaustDoohickey.dsp, for instance)
 
-this will leave a working main.cpp file and updated dependencies in the /main directory. to flash again without building, run 
+this will create the dsp.cpp, FaustProgram.cpp, and FaustProgram.h files in the /main directory, build, and flash. Individual actions are also available with esp-idf.sh script:
 ```
-sh ./reflash.sh
+sh ./esp-idf.sh [ menuconfig | build | flash | monitor ]
 ```
+
+note: `monitor` restarts the board. To exit the monitor use `Ctrl-]`
+
+# UDP control
+
+Parameters controllable by UDP can be set up in the faust code such as in this example:
+```
+periodms = nentry("period",1000,50,2000,10);
+freq = nentry("freq",100, 20, 10000, 1);
+strikePosition = nentry("strikePosition", .5, 0, 1, 0.01);
+strikeSharpness = nentry("strikeSharpness", .5, 0, 1, 0.01);
+gain = nentry("gain", 1, 0, 5, 0.1);
+```
+only the first two araguments to nentry have any effect in this context, although the have to be there. You can then change arguments over UDP (use 255.255.255.255, or monitor the output to get the specific IP) with a string such as "/freq 440"
 
 # requirements
 

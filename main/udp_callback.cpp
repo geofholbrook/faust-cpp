@@ -22,6 +22,5 @@ void udp_callback(char rx_buffer[128])
     float value = atof(value_str);
     strcpy(param, param+1);  // removes leading slash
     
-	printf("param: %s value: %f", param, value);
-    faust_setParamValue(param, value);
+	faust_setParamValue(param, value);
 }

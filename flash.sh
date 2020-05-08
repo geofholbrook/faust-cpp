@@ -41,4 +41,4 @@ sed "s/%ModuleName%/${MODULENAME}/g" ./main/dsp-template.txt > ./main/dsp.cpp
 # make esp-idf tools available in shell, compile, and flash
 source ${ESP_IDF_PATH}/export.sh
 idf.py build 
-idf.py -p $(read_var PORT .env) flash monitor
+idf.py -p $(read_var PORT .env) flash
