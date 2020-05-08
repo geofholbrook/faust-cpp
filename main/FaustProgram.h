@@ -40,11 +40,7 @@ class esp32_midi;
 #endif
 
 class Djembe
-{
     private:
-    
-        esp32audio* fAudio;
-    	dsp* fDSP;
         MapUI* fUI;
     #ifdef MIDICTRL
         esp32_midi* fMIDIHandler;        
@@ -57,10 +53,5 @@ class Djembe
         ~Djembe();
     
         bool start();
-        void stop();
     
         void setParamValue(const std::string&, float);
-        float getParamValue(const std::string& path);
-};
-
-#endif

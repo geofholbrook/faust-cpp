@@ -8140,11 +8140,13 @@ struct dsp_poly_factory : public dsp_factory {
 
 #include <algorithm>
 #include <cmath>
-#include <math.h>
 
+<<<<<<< HEAD
 static float mydsp_faustpower2_f(float value) {
 	return (value * value);
 }
+=======
+>>>>>>> 00bb1afe12e871971fd79668240ac73a2cc441cf
 
 #ifndef FAUSTCLASS 
 #define FAUSTCLASS mydsp
@@ -8305,14 +8307,18 @@ class mydsp : public dsp {
 	}
 
 	virtual int getNumInputs() {
-		return 0;
+		return 1;
 	}
 	virtual int getNumOutputs() {
-		return 1;
+		return 2;
 	}
 	virtual int getInputRate(int channel) {
 		int rate;
 		switch ((channel)) {
+			case 0: {
+				rate = 1;
+				break;
+			}
 			default: {
 				rate = -1;
 				break;
@@ -8324,6 +8330,10 @@ class mydsp : public dsp {
 		int rate;
 		switch ((channel)) {
 			case 0: {
+				rate = 1;
+				break;
+			}
+			case 1: {
 				rate = 1;
 				break;
 			}
@@ -8415,9 +8425,9 @@ class mydsp : public dsp {
 	}
 	
 	virtual void instanceClear() {
+<<<<<<< HEAD
 		for (int l0 = 0; (l0 < 2); l0 = (l0 + 1)) {
 			iVec0[l0] = 0;
-		}
 		for (int l1 = 0; (l1 < 2); l1 = (l1 + 1)) {
 			iRec3[l1] = 0;
 		}
@@ -8498,9 +8508,9 @@ class mydsp : public dsp {
 		}
 		for (int l27 = 0; (l27 < 3); l27 = (l27 + 1)) {
 			fRec25[l27] = 0.0f;
-		}
-	}
-	
+=======
+		IOTA = 0;
+		for (int l0 = 0; (l0 < 8192); l0 = (l0 + 1)) {
 	virtual void init(int sample_rate) {
 		classInit(sample_rate);
 		instanceInit(sample_rate);
@@ -8520,17 +8530,23 @@ class mydsp : public dsp {
 	}
 	
 	virtual void buildUserInterface(UI* ui_interface) {
+<<<<<<< HEAD
 		ui_interface->openVerticalBox("Djembe");
 		ui_interface->addNumEntry("freq", &fEntry4, 100.0f, 20.0f, 10000.0f, 1.0f);
 		ui_interface->addNumEntry("gain", &fEntry0, 1.0f, 0.0f, 5.0f, 0.100000001f);
 		ui_interface->addNumEntry("period", &fEntry3, 1000.0f, 50.0f, 2000.0f, 10.0f);
 		ui_interface->addNumEntry("strikePosition", &fEntry1, 0.5f, 0.0f, 1.0f, 0.00999999978f);
 		ui_interface->addNumEntry("strikeSharpness", &fEntry2, 0.5f, 0.0f, 1.0f, 0.00999999978f);
+=======
+		ui_interface->openVerticalBox("EchoTest");
+>>>>>>> 00bb1afe12e871971fd79668240ac73a2cc441cf
 		ui_interface->closeBox();
 	}
 	
 	virtual void compute(int count, FAUSTFLOAT** inputs, FAUSTFLOAT** outputs) {
+		FAUSTFLOAT* input0 = inputs[0];
 		FAUSTFLOAT* output0 = outputs[0];
+<<<<<<< HEAD
 		float fSlow0 = float(fEntry1);
 		float fSlow1 = std::tan((fConst1 * ((15000.0f * fSlow0) + 500.0f)));
 		float fSlow2 = (1.0f / fSlow1);
@@ -8653,6 +8669,16 @@ class mydsp : public dsp {
 			fRec24[1] = fRec24[0];
 			fRec25[2] = fRec25[1];
 			fRec25[1] = fRec25[0];
+=======
+		FAUSTFLOAT* output1 = outputs[1];
+		for (int i = 0; (i < count); i = (i + 1)) {
+			float fTemp0 = float(input0[i]);
+			fRec0[(IOTA & 8191)] = (fTemp0 + (0.5f * fRec0[((IOTA - 5001) & 8191)]));
+			fRec1[(IOTA & 8191)] = (fTemp0 + (0.5f * fRec1[((IOTA - 5001) & 8191)]));
+			output0[i] = FAUSTFLOAT(fRec0[((IOTA - 0) & 8191)]);
+			output1[i] = FAUSTFLOAT(fRec1[((IOTA - 0) & 8191)]);
+			IOTA = (IOTA + 1);
+>>>>>>> 00bb1afe12e871971fd79668240ac73a2cc441cf
 		}
 	}
 
@@ -8660,9 +8686,15 @@ class mydsp : public dsp {
 
 #ifdef FAUST_UIMACROS
 	#define FAUST_CLASS_NAME "mydsp"
+<<<<<<< HEAD
 	#define FAUST_INPUTS 0
 	#define FAUST_OUTPUTS 1
 	#define FAUST_ACTIVES 5
+=======
+	#define FAUST_INPUTS 1
+	#define FAUST_OUTPUTS 2
+	#define FAUST_ACTIVES 0
+>>>>>>> 00bb1afe12e871971fd79668240ac73a2cc441cf
 	#define FAUST_PASSIVES 0
 	FAUST_ADDNUMENTRY("freq", fEntry4, 100.0f, 20.0f, 10000.0f, 1.0f);
 	FAUST_ADDNUMENTRY("gain", fEntry0, 1.0f, 0.0f, 5.0f, 0.10000000000000001f);
@@ -8680,7 +8712,11 @@ std::list<GUI*> GUI::fGuiList;
 ztimedmap GUI::gTimedZoneMap;
 #endif
 
+<<<<<<< HEAD
 Djembe::Djembe(int sample_rate, int buffer_size)
+=======
+EchoTest::EchoTest(int sample_rate, int buffer_size)
+>>>>>>> 00bb1afe12e871971fd79668240ac73a2cc441cf
 {
     fUI = new MapUI();
     fAudio = new esp32audio(sample_rate, buffer_size);
