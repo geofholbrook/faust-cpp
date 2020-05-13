@@ -54,7 +54,13 @@ void other_parser(char rx_buffer[128])
 
         set_led(led_number, red, green, blue);
     
-    } else {
+    } else if (osc_address[0] == "all-leds") {
+                    uint8_t red = stoi(words[1]);
+        uint8_t green = stoi(words[2]);
+        uint8_t blue = stoi(words[3]);
+        set_all_leds(red,green,blue);
+    }
+    else {
         faust_setParamValue(osc_address[0], stof(words[1]));
     }
 }
