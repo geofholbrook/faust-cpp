@@ -44,7 +44,7 @@ void app_main(void)
     wm8978.spkVolSet(50); // [0-63]
     
     wm8978.hpVolSet(40,40);
-    wm8978.i2sCfg(2,0);
+    wm8978.i2sCfg(2,0); 
     
     faust_start();
     
