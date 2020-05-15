@@ -15,7 +15,7 @@
 #include "esp_event.h"
 #include "esp_log.h"
 #include "nvs_flash.h"
-#include "esp_netif.h"
+#include "tcpip_adapter.h"
 #include "protocol_examples_common.h"
 
 #include "lwip/err.h"
@@ -141,7 +141,7 @@ void udp_main(void)
 {
 
     ESP_ERROR_CHECK(nvs_flash_init());
-    ESP_ERROR_CHECK(esp_netif_init());
+    tcpip_adapter_init();
     ESP_ERROR_CHECK(esp_event_loop_create_default());
 
     /* This helper function configures Wi-Fi or Ethernet, as selected in menuconfig.

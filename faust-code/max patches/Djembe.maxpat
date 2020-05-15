@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 1923.0, -427.0, 834.0, 485.0 ],
+		"rect" : [ 1923.0, -427.0, 832.0, 484.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -110,7 +110,6 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 533.666748000000098, 250.90002400000003, 73.0, 35.0 ],
-					"presentation_linecount" : 2,
 					"text" : ";\rosc /gain $1"
 				}
 
@@ -149,7 +148,6 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 379.666748000000098, 250.90002400000003, 137.0, 35.0 ],
-					"presentation_linecount" : 3,
 					"text" : ";\rosc /strikeSharpness $1"
 				}
 
@@ -225,7 +223,6 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 246.666748000000098, 250.90002400000003, 122.0, 35.0 ],
-					"presentation_linecount" : 4,
 					"text" : ";\rosc /strikePosition $1"
 				}
 
@@ -253,7 +250,6 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 136.666748000000098, 250.90002400000003, 71.0, 35.0 ],
-					"presentation_linecount" : 3,
 					"text" : ";\rosc /freq $1"
 				}
 
